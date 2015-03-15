@@ -79,11 +79,11 @@ Tree::prepare(Node* _np) const
 }
 
 /*
-bool
-Tree::search(unsigned _len1, const char* _str1, unsigned& _len2, const char*& _str2) const
-{
-}
-*/
+   bool
+   Tree::search(unsigned _len1, const char* _str1, unsigned& _len2, const char*& _str2) const
+   {
+   }
+   */
 
 bool
 Tree::search(const Bstr* _key, const Bstr*& _value)
@@ -98,7 +98,6 @@ Tree::search(const Bstr* _key, const Bstr*& _value)
 	this->TSM->request(request);
 	return true;
 }
-
 bool
 Tree::insert(Bstr* _key, Bstr* _value)
 {
@@ -189,11 +188,11 @@ Tree::insert(Bstr* _key, Bstr* _value)
 }
 
 /*
-bool
-Tree::insert(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2)
-{
-}
-*/
+   bool
+   Tree::insert(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2)
+   {
+   }
+   */
 
 bool
 Tree::modify(const Bstr* _key, Bstr* _value)
@@ -213,11 +212,11 @@ Tree::modify(const Bstr* _key, Bstr* _value)
 }
 
 /*
-bool
-Tree::modify(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2)
-{
-}
-*/
+   bool
+   Tree::modify(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2)
+   {
+   }
+   */
 
 /* this function is useful for search and modify */
 Node*
@@ -236,7 +235,7 @@ Tree::find(const Bstr* _key, int* _store, bool ifmodify) const
 		for(i = 0; i < j; ++i)				//BETTER(Binary-Search)
 			if(bstr < *(p->getKey(i)))
 				break;
-	 	p = p->getChild(i);
+		p = p->getChild(i);
 		this->prepare(p);
 	}
 	j = p->getNum();
@@ -252,11 +251,11 @@ Tree::find(const Bstr* _key, int* _store, bool ifmodify) const
 }
 
 /*
-Node*
-Tree::find(unsigned _len, const char* _str, int* store) const
-{
-}
-*/
+   Node*
+   Tree::find(unsigned _len, const char* _str, int* store) const
+   {
+   }
+   */
 
 bool	//BETTER: if not found, the road are also dirty! find first?
 Tree::remove(const Bstr* _key)
@@ -329,11 +328,11 @@ Tree::remove(const Bstr* _key)
 }
 
 /*
-bool
-Tree::remove(unsigned _len, const char* _str)
-{
-}
-*/
+   bool
+   Tree::remove(unsigned _len, const char* _str)
+   {
+   }
+   */
 
 const Bstr*
 Tree::getRangeValue()
@@ -341,18 +340,33 @@ Tree::getRangeValue()
 	return this->VALUES.read();
 }
 
-bool	//TODO: not exist, not in order, one-edge-case
+bool	//special case: not exist, not in order, one-edge-case
 Tree::range_query(const Bstr* _key1, const Bstr* _key2)
 {			
-	request = 0;
+	if(_key1 == NULL && _key2 == NULL)
+		return false;
+	//ok to search one-edge, requiring only one be NULL
 	this->VALUES.open();
 	/* find and write value */
 	int store1, store2;
-	Node* p1 = this->find(_key1, &store1, false);
-	this->TSM->request(request);
-	request = 0;
-	Node* p2 = this->find(_key2, &store2, false);
-	this->TSM->request(request);
+	Node *p1, *p2;
+	if(_key1 != NULL)
+	{
+		request = 0;
+		p1 = this->find(_key1, &store1, false);
+		if(p1 == NULL || store1 == -1)
+			return false;
+		this->TSM->request(request);
+	}
+	if(_key2 != NULL)
+	{
+		request = 0;
+		p2 = this->find(_key2, &store2, false);
+		if(p2 == NULL || store2 == -1)
+			return false;
+		this->TSM->request(request);
+	}
+	//TODO:if accurate? direction, edge...
 	Node* p = p1;
 	unsigned i, l, r;
 	while(1)

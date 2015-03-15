@@ -46,10 +46,10 @@ Util::compare(const char* _str1, unsigned _len1, const char* _str2, unsigned _le
 	else	return -1 * ifswap;
 	*/
 	for(i = 0; i < _len1; ++i)
-	{
-		if(_str1[i] < _str2[i])
+	{	//ASCII: 0~127 but c: 0~255(-1) all transfered to unsigned char when comparing
+		if((unsigned char)_str1[i] < (unsigned char)_str2[i])
 			return -1 * ifswap;
-		else if(_str1[i] > _str2[i])
+		else if((unsigned char)_str1[i] > (unsigned char)_str2[i])
 			return 1 * ifswap;
 		else;
 	}

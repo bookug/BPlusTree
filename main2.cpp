@@ -10,7 +10,7 @@
 using namespace std;
 
 #define LEN 10000
-#define NUM 100000
+#define NUM 1000000
 
 int main(int argc, char** argv)
 {
@@ -53,26 +53,25 @@ int main(int argc, char** argv)
 			bstr[k].setLen(j);
 			bstr[k].setStr(s);
 		}
-
+		printf("this is the %d-th pair\n", i);
 		if(t.insert(&bstr[0], &bstr[1]))
 			printf("Insert Success\n");
 		else
 			printf("Insert Fail\n");
+		/*
 		if(t.search(&bstr[0], bp))
 			bp->print("BSTR");
 		
-		if(i % 7 == 0)
-		{
 		if(t.remove(&bstr[0]))
 			printf("Remove Success\n");
 		else
 			printf("Remove Fail\n");
-		}
 		t.print("TREE");
+		*/
 	}
 	bstr[0].clear();
 	bstr[1].clear();
-//	t.print("TREE");
+	t.print("TREE");
 	t.save();
 
 	return 0;
