@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -Wall -Werror -c -g
-PROGRAMS = demo1 demo2 demo3 clean tags 
+PROGRAMS = demo1 demo2 demo3 clean  
 obj = Tree.o Storage.o Node.o IntlNode.o LeafNode.o Bstr.o Util.o Heap.o RangeValue.o
 all: $(PROGRAMS)
 demo1: main1.cpp $(obj)

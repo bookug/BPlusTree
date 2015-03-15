@@ -17,7 +17,7 @@ class Storage
 {                    
 public:
 	static const unsigned BLOCK_SIZE = 1 << 16;	//fixed size of disk-block
-	static const unsigned MAX_BUFFER_SIZE = 1 << 31;		//max buffer size
+	static const unsigned MAX_BUFFER_SIZE = 0xffffffff;		//max buffer size
 	static const unsigned HEAP_SIZE = MAX_BUFFER_SIZE/sizeof(Node);
 	static const unsigned MAX_BLOCK_NUM = 1 << 24;		//max block-num
 	static const unsigned SuperNum = MAX_BLOCK_NUM/(8*BLOCK_SIZE)+1;
