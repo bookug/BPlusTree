@@ -27,7 +27,7 @@ Heap.o: heap/Heap.cpp
 	$(CC) $(CFLAGS) heap/Heap.cpp -o Heap.o
 RangeValue.o: rangevalue/RangeValue.cpp
 	$(CC) $(CFLAGS) rangevalue/RangeValue.cpp -o RangeValue.o
-.PHONY: clean tags 
+.PHONY: clean  
 clean:
 	rm -f $(obj)
 tags:
