@@ -1,0 +1,242 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Address	storage/Storage.cpp	/^Storage::Address(unsigned _blocknum) const  \/\/BETTER: inline function$/;"	f	class:Storage
+AllocBlock	storage/Storage.cpp	/^Storage::AllocBlock()$/;"	f	class:Storage
+AllocKeys	node/Node.cpp	/^Node::AllocKeys()$/;"	f	class:Node
+AllocValues	node/LeafNode.cpp	/^LeafNode::AllocValues()$/;"	f	class:LeafNode
+BLOCK_SIZE	storage/Storage.h	/^	static const unsigned BLOCK_SIZE = 1 << 16;	\/\/fixed size of disk-block$/;"	m	class:Storage
+BlockInfo	storage/file.h	/^	BlockInfo()$/;"	f	class:BlockInfo
+BlockInfo	storage/file.h	/^	BlockInfo(unsigned _num, BlockInfo* _bp)$/;"	f	class:BlockInfo
+BlockInfo	storage/file.h	/^class BlockInfo$/;"	c
+Blockaddr_t	util/Util.h	/^typedef unsigned int Blockaddr_t;	$/;"	t
+Blocknum	storage/Storage.cpp	/^Storage::Blocknum(long address) const$/;"	f	class:Storage
+Bstr	bstr/Bstr.cpp	/^Bstr::Bstr()$/;"	f	class:Bstr
+Bstr	bstr/Bstr.cpp	/^Bstr::Bstr(char* _str, unsigned _len)$/;"	f	class:Bstr
+Bstr	bstr/Bstr.h	/^class Bstr$/;"	c
+Bstrlen_t	util/Util.h	/^typedef unsigned int Bstrlen_t;		$/;"	t
+CC	Makefile	/^CC = g++$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Wall -Werror -c -g$/;"	m
+CopyToTransfer	tree/Tree.cpp	/^Tree::CopyToTransfer(const Bstr* _bstr)$/;"	f	class:Tree
+DEGREE	node/Node.h	/^	static const unsigned DEGREE = 2 * 64;					\/\/the degree of B+ tree, restricted in enev.(100 is another type of degree)$/;"	m	class:Node
+FreeBlock	storage/Storage.cpp	/^Storage::FreeBlock(unsigned _blocknum)$/;"	f	class:Storage
+HEAP_SIZE	storage/Storage.h	/^	static const unsigned HEAP_SIZE = MAX_BUFFER_SIZE\/sizeof(Node);$/;"	m	class:Storage
+Heap	heap/Heap.cpp	/^Heap::Heap()$/;"	f	class:Heap
+Heap	heap/Heap.cpp	/^Heap::Heap(unsigned _size)$/;"	f	class:Heap
+Heap	heap/Heap.h	/^class Heap$/;"	c
+Heaplen_t	util/Util.h	/^typedef unsigned int Heaplen_t;$/;"	t
+INTL_SIZE	node/IntlNode.h	9;"	d
+IntlNode	node/IntlNode.cpp	/^IntlNode::IntlNode()$/;"	f	class:IntlNode
+IntlNode	node/IntlNode.cpp	/^IntlNode::IntlNode(bool isVirtual)$/;"	f	class:IntlNode
+IntlNode	node/IntlNode.h	/^class IntlNode: public Node$/;"	c
+LEAF_SIZE	node/LeafNode.h	10;"	d
+LEN	main2.cpp	12;"	d	file:
+LeafNode	node/LeafNode.cpp	/^LeafNode::LeafNode()$/;"	f	class:LeafNode
+LeafNode	node/LeafNode.cpp	/^LeafNode::LeafNode(bool isVirtual)$/;"	f	class:LeafNode
+LeafNode	node/LeafNode.h	/^class LeafNode: public Node    $/;"	c
+MAX	util/Util.h	32;"	d
+MAX_BLOCK_NUM	storage/Storage.h	/^	static const unsigned MAX_BLOCK_NUM = 1 << 24;		\/\/max block-num$/;"	m	class:Storage
+MAX_BUFFER_SIZE	storage/Storage.h	/^	static const unsigned MAX_BUFFER_SIZE = 1 << 31;		\/\/max buffer size$/;"	m	class:Storage
+MAX_CHILD_NUM	node/Node.h	/^	static const unsigned MAX_CHILD_NUM = DEGREE;		$/;"	m	class:Node
+MAX_KEY_NUM	node/Node.h	/^	static const unsigned MAX_KEY_NUM = MAX_CHILD_NUM - 1;	\/\/max key-num$/;"	m	class:Node
+MIN	util/Util.h	26;"	d
+MIN_CHILD_NUM	node/Node.h	/^	static const unsigned MIN_CHILD_NUM = DEGREE >> 1;$/;"	m	class:Node
+MIN_KEY_NUM	node/Node.h	/^	static const unsigned MIN_KEY_NUM = MIN_CHILD_NUM - 1;	\/\/min key-num$/;"	m	class:Node
+Memorybuf_t	util/Util.h	/^typedef unsigned int Memorybuf_t;	$/;"	t
+NF_HT	node/Node.h	/^	static const unsigned NF_HT = 0xf00000;		\/\/height area in rank$/;"	m	class:Node
+NF_ID	node/Node.h	/^	static const unsigned NF_ID = 0x00080000;	\/\/is dirty, in rank-area$/;"	m	class:Node
+NF_IL	node/Node.h	/^	static const unsigned NF_IL = 0x80000000;	\/\/is leaf$/;"	m	class:Node
+NF_IM	node/Node.h	/^	static const unsigned NF_IM = 0x20000000;	\/\/in memory, not virtual$/;"	m	class:Node
+NF_KN	node/Node.h	/^	static const unsigned NF_KN = 0x07f000;		\/\/NOTICE: decided by DEGREE$/;"	m	class:Node
+NF_RK	node/Node.h	/^	static const unsigned NF_RK = 0x00ffffff;	\/\/select-rank, in Storage$/;"	m	class:Node
+NUM	main2.cpp	13;"	d	file:
+Node	node/Node.cpp	/^Node::Node()$/;"	f	class:Node
+Node	node/Node.cpp	/^Node::Node(bool isVirtual)$/;"	f	class:Node
+Node	node/Node.h	/^class Node       				\/\/abstract basic class $/;"	c
+Normal	node/IntlNode.cpp	/^IntlNode::Normal()$/;"	f	class:IntlNode
+Normal	node/LeafNode.cpp	/^LeafNode::Normal()$/;"	f	class:LeafNode
+PROGRAMS	Makefile	/^PROGRAMS = demo1 demo2 demo3 clean tags $/;"	m
+ROUNDDOWN	util/Util.h	48;"	d
+ROUNDUP	util/Util.h	53;"	d
+RangeValue	rangevalue/RangeValue.cpp	/^RangeValue::RangeValue()$/;"	f	class:RangeValue
+RangeValue	rangevalue/RangeValue.h	/^class RangeValue$/;"	c
+ReadAlign	storage/Storage.cpp	/^Storage::ReadAlign(unsigned* _next)$/;"	f	class:Storage
+Storage	storage/Storage.cpp	/^Storage::Storage()$/;"	f	class:Storage
+Storage	storage/Storage.cpp	/^Storage::Storage(string& _filepath, string& _mode, unsigned* _height)$/;"	f	class:Storage
+Storage	storage/Storage.h	/^class Storage$/;"	c
+SuperNum	storage/Storage.h	/^	static const unsigned SuperNum = MAX_BLOCK_NUM\/(8*BLOCK_SIZE)+1;$/;"	m	class:Storage
+TSM	tree/Tree.h	/^	Storage* TSM;           	\/\/Tree-Storage-Manage$/;"	m	class:Tree
+Tree	tree/Tree.cpp	/^Tree::Tree()$/;"	f	class:Tree
+Tree	tree/Tree.cpp	/^Tree::Tree(const string& _storepath, const string& _filename, const char* _mode)$/;"	f	class:Tree
+Tree	tree/Tree.h	/^class Tree$/;"	c
+Util	util/Util.h	/^class Util	$/;"	c
+VALUES	tree/Tree.h	/^	RangeValue VALUES;			\/\/just for range query$/;"	m	class:Tree
+Virtual	node/IntlNode.cpp	/^IntlNode::Virtual()$/;"	f	class:IntlNode
+Virtual	node/LeafNode.cpp	/^LeafNode::Virtual()$/;"	f	class:LeafNode
+WriteAlign	storage/Storage.cpp	/^Storage::WriteAlign(unsigned* _curnum, bool& _SpecialBlock)$/;"	f	class:Storage
+_BSTR_H	bstr/Bstr.h	4;"	d
+_FILE_H	storage/file.h	5;"	d
+_HEAP_H	heap/Heap.h	4;"	d
+_INTL_NODE_H	node/IntlNode.h	4;"	d
+_LEAF_NODE_H	node/LeafNode.h	4;"	d
+_NODE_H	node/Node.h	4;"	d
+_RANGE_VALUE_H	rangevalue/RangeValue.h	9;"	d
+_STORAGE_H	storage/Storage.h	5;"	d
+_TREE_H	tree/Tree.h	4;"	d
+_UTIL_H	util/Util.h	4;"	d
+addChild	node/IntlNode.cpp	/^IntlNode::addChild(Node* _child, int _index)$/;"	f	class:IntlNode
+addChild	node/Node.h	/^	virtual bool addChild(Node* _child, int _index) { return true; };$/;"	f	class:Node
+addKey	node/Node.cpp	/^Node::addKey(const Bstr* _key, int _index, bool ifcopy)$/;"	f	class:Node
+addNum	node/Node.cpp	/^Node::addNum()$/;"	f	class:Node
+addValue	node/LeafNode.cpp	/^LeafNode::addValue(const Bstr* _value, int _index)$/;"	f	class:LeafNode
+addValue	node/Node.h	/^	virtual bool addValue(const Bstr* _value, int _index) { return true; };$/;"	f	class:Node
+childs	node/IntlNode.h	/^	Node* childs[MAX_CHILD_NUM+1];			$/;"	m	class:IntlNode
+clear	bstr/Bstr.cpp	/^Bstr::clear()	$/;"	f	class:Bstr
+coalesce	node/IntlNode.cpp	/^IntlNode::coalesce(Node* _father, int _index)$/;"	f	class:IntlNode
+coalesce	node/LeafNode.cpp	/^LeafNode::coalesce(Node* _father, int _index)$/;"	f	class:LeafNode
+compare	util/Util.cpp	/^Util::compare(const char* _str1, unsigned _len1, const char* _str2, unsigned _len2)$/;"	f	class:Util
+copy	bstr/Bstr.cpp	/^Bstr::copy(const Bstr* _bp)$/;"	f	class:Bstr
+createNode	storage/Storage.cpp	/^Storage::createNode(Node*& _np) \/\/cretae virtual nodes, not in-mem$/;"	f	class:Storage
+delDirty	node/Node.cpp	/^Node::delDirty()$/;"	f	class:Node
+delMem	node/Node.cpp	/^Node::delMem()$/;"	f	class:Node
+filename	tree/Tree.h	/^	std::string filename;      	\/\/ok for user to change$/;"	m	class:Tree
+filepath	storage/Storage.h	/^	std::string filepath;$/;"	m	class:Storage
+find	tree/Tree.cpp	/^Tree::find(const Bstr* _key, int* _store, bool ifmodify) const$/;"	f	class:Tree
+flag	node/Node.h	/^	unsigned flag;			\/\/NF_RK, NF_IL,NF_ID, NF_IV, propety$/;"	m	class:Node
+fp	rangevalue/RangeValue.h	/^	FILE* fp;$/;"	m	class:RangeValue
+freelist	storage/Storage.h	/^	BlockInfo* freelist;$/;"	m	class:Storage
+freemem	storage/Storage.h	/^	unsigned freemem;  			\/\/free memory to use, non-negative$/;"	m	class:Storage
+getChild	node/IntlNode.cpp	/^IntlNode::getChild(int _index) const$/;"	f	class:IntlNode
+getChild	node/Node.h	/^	virtual Node* getChild(int _index) const { return NULL; };$/;"	f	class:Node
+getFilePath	tree/Tree.cpp	/^Tree::getFilePath()$/;"	f	class:Tree
+getFlag	node/Node.cpp	/^Node::getFlag() const$/;"	f	class:Node
+getHeight	node/Node.cpp	/^Node::getHeight() const$/;"	f	class:Node
+getHeight	tree/Tree.cpp	/^Tree::getHeight() const$/;"	f	class:Tree
+getKey	node/Node.cpp	/^Node::getKey(int _index) const$/;"	f	class:Node
+getLen	bstr/Bstr.cpp	/^Bstr::getLen() const$/;"	f	class:Bstr
+getLen	heap/Heap.cpp	/^Heap::getLen() const$/;"	f	class:Heap
+getNext	node/LeafNode.cpp	/^LeafNode::getNext() const$/;"	f	class:LeafNode
+getNext	node/Node.h	/^	virtual Node* getNext() const { return NULL; };$/;"	f	class:Node
+getNum	node/Node.cpp	/^Node::getNum() const$/;"	f	class:Node
+getPrev	node/LeafNode.cpp	/^LeafNode::getPrev() const$/;"	f	class:LeafNode
+getPrev	node/Node.h	/^	virtual Node* getPrev() const { return NULL; };$/;"	f	class:Node
+getRangeValue	tree/Tree.cpp	/^Tree::getRangeValue()$/;"	f	class:Tree
+getRank	node/Node.cpp	/^Node::getRank() const$/;"	f	class:Node
+getRoot	tree/Tree.cpp	/^Tree::getRoot() const$/;"	f	class:Tree
+getSize	heap/Heap.cpp	/^Heap::getSize() const$/;"	f	class:Heap
+getSize	node/IntlNode.cpp	/^IntlNode::getSize() const$/;"	f	class:IntlNode
+getSize	node/LeafNode.cpp	/^LeafNode::getSize() const$/;"	f	class:LeafNode
+getStore	node/Node.cpp	/^Node::getStore() const$/;"	f	class:Node
+getStr	bstr/Bstr.cpp	/^Bstr::getStr() const$/;"	f	class:Bstr
+getTop	heap/Heap.cpp	/^Heap::getTop() const$/;"	f	class:Heap
+getValue	node/LeafNode.cpp	/^LeafNode::getValue(int _index) const$/;"	f	class:LeafNode
+getValue	node/Node.h	/^	virtual const Bstr* getValue(int _index) const { return NULL; };$/;"	f	class:Node
+handler	storage/Storage.cpp	/^Storage::handler(unsigned _needmem)	\/\/>0$/;"	f	class:Storage
+heap	heap/Heap.h	/^	Node** heap;			\/\/dynamic array$/;"	m	class:Heap
+height	tree/Tree.h	/^	unsigned int height;		\/\/0 indicates an empty tree$/;"	m	class:Tree
+inMem	node/Node.cpp	/^Node::inMem() const$/;"	f	class:Node
+insert	heap/Heap.cpp	/^Heap::insert(Node* _np)$/;"	f	class:Heap
+insert	tree/Tree.cpp	/^Tree::insert(Bstr* _key, Bstr* _value)$/;"	f	class:Tree
+int2string	util/Util.cpp	/^Util::int2string(int n)$/;"	f	class:Util
+isDirty	node/Node.cpp	/^Node::isDirty() const$/;"	f	class:Node
+isEmpty	heap/Heap.cpp	/^Heap::isEmpty() const$/;"	f	class:Heap
+isLeaf	node/Node.cpp	/^Node::isLeaf() const$/;"	f	class:Node
+keys	node/Node.h	/^	Bstr* keys; $/;"	m	class:Node
+leaves	tree/Tree.h	/^	Node* leaves;				\/\/the list of LeafNode$/;"	m	class:Tree
+length	bstr/Bstr.h	/^	unsigned length;$/;"	m	class:Bstr
+length	heap/Heap.h	/^	unsigned length;			\/\/valid elements num$/;"	m	class:Heap
+logsfp	util/Util.h	/^	static FILE* logsfp;				\/\/file: executing logs$/;"	m	class:Util
+main	main1.cpp	/^main(int argc, char **argv)$/;"	f
+main	main2.cpp	/^int main(int argc, char** argv)$/;"	f
+main	main3.cpp	/^int main(int argc, char** argv)$/;"	f
+minheap	storage/Storage.h	/^	Heap* minheap;				\/\/heap of Nodes's pointer, sorted in NF_RK$/;"	m	class:Storage
+mode	tree/Tree.h	/^	std::string mode;             		\/\/BETTER(to use enum)$/;"	m	class:Tree
+modify	heap/Heap.cpp	/^Heap::modify(Node* _np, bool _flag)	\/\/control direction$/;"	f	class:Heap
+modify	tree/Tree.cpp	/^Tree::modify(const Bstr* _key, Bstr* _value)$/;"	f	class:Tree
+next	node/LeafNode.h	/^	Node* next;$/;"	m	class:LeafNode
+next	storage/file.h	/^	BlockInfo* next;$/;"	m	class:BlockInfo
+num	storage/file.h	/^	unsigned num;			$/;"	m	class:BlockInfo
+obj	Makefile	/^obj = Tree.o Storage.o Node.o IntlNode.o LeafNode.o Bstr.o Util.o Heap.o RangeValue.o$/;"	m
+open	rangevalue/RangeValue.cpp	/^RangeValue::open()$/;"	f	class:RangeValue
+operator <	bstr/Bstr.cpp	/^Bstr::operator < (const Bstr& _bstr)$/;"	f	class:Bstr
+operator ==	bstr/Bstr.cpp	/^Bstr::operator == (const Bstr& _bstr)$/;"	f	class:Bstr
+operator >	bstr/Bstr.cpp	/^Bstr::operator > (const Bstr& _bstr)$/;"	f	class:Bstr
+preRead	storage/Storage.cpp	/^Storage::preRead(Node*& _root, Node*& _leaves)		\/\/pre-read and build whole tree$/;"	f	class:Storage
+prepare	tree/Tree.cpp	/^Tree::prepare(Node* _np) const$/;"	f	class:Tree
+prev	node/LeafNode.h	/^	Node* prev;	\/\/LeafNode$/;"	m	class:LeafNode
+print	bstr/Bstr.cpp	/^Bstr::print(string s) const$/;"	f	class:Bstr
+print	heap/Heap.cpp	/^Heap::print(string s)$/;"	f	class:Heap
+print	node/IntlNode.cpp	/^IntlNode::print(string s)$/;"	f	class:IntlNode
+print	node/LeafNode.cpp	/^LeafNode::print(string s)$/;"	f	class:LeafNode
+print	storage/Storage.cpp	/^Storage::print(string s)$/;"	f	class:Storage
+print	tree/Tree.cpp	/^Tree::print(string s)$/;"	f	class:Tree
+range_query	tree/Tree.cpp	/^Tree::range_query(const Bstr* _key1, const Bstr* _key2)$/;"	f	class:Tree
+read	rangevalue/RangeValue.cpp	/^RangeValue::read()$/;"	f	class:RangeValue
+readBstr	storage/Storage.cpp	/^Storage::readBstr(Bstr* _bp, unsigned* _next)$/;"	f	class:Storage
+readNode	storage/Storage.cpp	/^Storage::readNode(Node* _np, int* _request)$/;"	f	class:Storage
+release	bstr/Bstr.cpp	/^Bstr::release() const$/;"	f	class:Bstr
+release	node/IntlNode.cpp	/^IntlNode::release()$/;"	f	class:IntlNode
+release	node/LeafNode.cpp	/^LeafNode::release()$/;"	f	class:LeafNode
+release	tree/Tree.cpp	/^Tree::release(Node* _np) const$/;"	f	class:Tree
+remove	heap/Heap.cpp	/^Heap::remove()$/;"	f	class:Heap
+remove	tree/Tree.cpp	/^Tree::remove(const Bstr* _key)$/;"	f	class:Tree
+request	storage/Storage.cpp	/^Storage::request(int _needmem)	\/\/aligned to byte$/;"	f	class:Storage
+request	tree/Tree.cpp	/^int request = 0;$/;"	v
+reset	rangevalue/RangeValue.cpp	/^RangeValue::reset()$/;"	f	class:RangeValue
+root	tree/Tree.h	/^	Node* root;$/;"	m	class:Tree
+save	tree/Tree.cpp	/^Tree::save()	\/\/save the whole tree to disk$/;"	f	class:Tree
+search	tree/Tree.cpp	/^Tree::search(const Bstr* _key, const Bstr*& _value)$/;"	f	class:Tree
+setChild	node/IntlNode.cpp	/^IntlNode::setChild(Node* _child, int _index)$/;"	f	class:IntlNode
+setChild	node/Node.h	/^	virtual bool setChild(Node* _child, int _index) { return true; };$/;"	f	class:Node
+setDirty	node/Node.cpp	/^Node::setDirty()$/;"	f	class:Node
+setFlag	node/Node.cpp	/^Node::setFlag(unsigned _flag) $/;"	f	class:Node
+setHeight	node/Node.cpp	/^Node::setHeight(unsigned _h)$/;"	f	class:Node
+setHeight	tree/Tree.cpp	/^Tree::setHeight(unsigned _h)$/;"	f	class:Tree
+setKey	node/Node.cpp	/^Node::setKey(const Bstr* _key, int _index, bool ifcopy)$/;"	f	class:Node
+setLen	bstr/Bstr.cpp	/^Bstr::setLen(unsigned _len)$/;"	f	class:Bstr
+setMem	node/Node.cpp	/^Node::setMem()$/;"	f	class:Node
+setNext	node/LeafNode.cpp	/^LeafNode::setNext(Node* _next)$/;"	f	class:LeafNode
+setNext	node/Node.h	/^	virtual void setNext(Node* _next) {};$/;"	f	class:Node
+setNum	node/Node.cpp	/^Node::setNum(int _num)$/;"	f	class:Node
+setPrev	node/LeafNode.cpp	/^LeafNode::setPrev(Node* _prev)$/;"	f	class:LeafNode
+setPrev	node/Node.h	/^	virtual void setPrev(Node* _prev) {};$/;"	f	class:Node
+setRank	node/Node.cpp	/^Node::setRank(unsigned _rank)$/;"	f	class:Node
+setStore	node/Node.cpp	/^Node::setStore(unsigned _store)$/;"	f	class:Node
+setStr	bstr/Bstr.cpp	/^Bstr::setStr(char* _str)$/;"	f	class:Bstr
+setValue	node/LeafNode.cpp	/^LeafNode::setValue(const Bstr* _value, int _index)$/;"	f	class:LeafNode
+setValue	node/Node.h	/^	virtual bool setValue(const Bstr* _value, int _index) { return true; };$/;"	f	class:Node
+showtime	util/Util.cpp	/^Util::showtime()$/;"	f	class:Util
+size	heap/Heap.h	/^	unsigned size;			\/\/max-size of heap$/;"	m	class:Heap
+split	node/IntlNode.cpp	/^IntlNode::split(Node* _father, int _index)$/;"	f	class:IntlNode
+split	node/LeafNode.cpp	/^LeafNode::split(Node* _father, int _index)$/;"	f	class:LeafNode
+store	node/Node.h	/^	unsigned store;			\/\/store address, the BLock index$/;"	m	class:Node
+storepath	tree/Tree.h	/^	std::string storepath;$/;"	m	class:Tree
+str	bstr/Bstr.h	/^	char* str;		\/\/pointers consume 8 byte in 64-bit system$/;"	m	class:Bstr
+string2int	util/Util.cpp	/^Util::string2int(string s)$/;"	f	class:Util
+subChild	node/IntlNode.cpp	/^IntlNode::subChild(int _index)$/;"	f	class:IntlNode
+subChild	node/Node.h	/^	virtual bool subChild(int _index) { return true; };$/;"	f	class:Node
+subKey	node/Node.cpp	/^Node::subKey(int _index, bool ifdel)$/;"	f	class:Node
+subNum	node/Node.cpp	/^Node::subNum()$/;"	f	class:Node
+subValue	node/LeafNode.cpp	/^LeafNode::subValue(int _index, bool ifdel)$/;"	f	class:LeafNode
+subValue	node/Node.h	/^	virtual bool subValue(int _index, bool ifdel = false) { return true;};$/;"	f	class:Node
+transfer	rangevalue/RangeValue.h	/^	Bstr transfer;$/;"	m	class:RangeValue
+transfer	tree/Tree.h	/^	Bstr transfer;				\/\/to transfer value searched$/;"	m	class:Tree
+treefp	storage/Storage.h	/^	FILE* treefp;				\/\/file: tree nodes$/;"	m	class:Storage
+treeheight	storage/Storage.h	/^	unsigned* treeheight;$/;"	m	class:Storage
+updateHeap	storage/Storage.cpp	/^Storage::updateHeap(Node* _np, unsigned _rank, bool _inheap) const$/;"	f	class:Storage
+values	node/LeafNode.h	/^	Bstr* values;$/;"	m	class:LeafNode
+write	rangevalue/RangeValue.cpp	/^RangeValue::write(const Bstr* _bp)$/;"	f	class:RangeValue
+writeBstr	storage/Storage.cpp	/^Storage::writeBstr(const Bstr* _bp, unsigned* _curnum, bool& _SpecialBlock)$/;"	f	class:Storage
+writeNode	storage/Storage.cpp	/^Storage::writeNode(Node* _np)$/;"	f	class:Storage
+writeTree	storage/Storage.cpp	/^Storage::writeTree(Node* _root)	\/\/write the whole tree back and close treefp$/;"	f	class:Storage
+~Bstr	bstr/Bstr.cpp	/^Bstr::~Bstr()	$/;"	f	class:Bstr
+~Heap	heap/Heap.cpp	/^Heap::~Heap()$/;"	f	class:Heap
+~IntlNode	node/IntlNode.cpp	/^IntlNode::~IntlNode()$/;"	f	class:IntlNode
+~LeafNode	node/LeafNode.cpp	/^LeafNode::~LeafNode()$/;"	f	class:LeafNode
+~Node	node/Node.h	/^	virtual ~Node() {};$/;"	f	class:Node
+~RangeValue	rangevalue/RangeValue.cpp	/^RangeValue::~RangeValue()$/;"	f	class:RangeValue
+~Storage	storage/Storage.cpp	/^Storage::~Storage()$/;"	f	class:Storage
+~Tree	tree/Tree.cpp	/^Tree::~Tree()$/;"	f	class:Tree

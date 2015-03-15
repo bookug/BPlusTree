@@ -1,0 +1,124 @@
+Things reducing the performance:
+1. too many new and delete
+2. not to use any STL
+3. better ways to compare the two str: unsigned long long(use a pointer to achieve), ^, when not equal then use <
+4. use malloc/free to replace new/delete
+5. waiting---
+
+
+#################################################################################################################################################
+
+
+Subtle notices:
+1. str may has '\0' as element
+2. use of inline function
+3. int changed to unsigned int, a good coding habit! using std::xxx
+4. try to utilize others's code
+5. does int covers the max length of string? and an integer value may can't be represented in int!!!
+
+
+
+###############################################################################
+Discuss on 2014.12.07:
+1. Debug will be a scary problem, thus requiring a log.(all keep in a unique file, better than cout) 
+2. Trees need to be keeped in file in the end, so there must be header in each block, not keeping the information in memory.
+3. If use dynamic blocking, fragments are disturbing and collapsing is time-consuming. Operating system uses 4KB-blocking for disk, if nodes are stored as a unit, each key-change will change the whole node-storing! If Bstr is a storing-unit, it can be very small/large, several diffrent-size-lists are needed(maybe unique files). However, system read/write from/to disk in unit of 4KB(or 512B?), locality seems to be lost.
+4. B+ operation must be perfectly right, two-direction list is needed for leaf-node, father deals with its children.
+
+
+#####################################################################################################################################################
+Questions from 2014.12.15
+1. When stored in disk, how to separate a string, which may contain '\0'? In our view, '\0' is a valid character, also counted.
+2. Node, Tree, Storage, is friend class ok? OR only public functions can be used?!
+
+
+#####################################################################################################################################################
+Dsicuss on 2014.12.19:
+1. Better to keep each class in a unique file, convinience for make and coding and view.
+2. In order to signalize variables/constants, associate them as statics in class, instead of #define.
+3. difference between IV and not-IM nodes! If IntlNode is ok to be swaped out, childs-pointers must be saved!
+
+###############################################################################
+Things to notice:
+1. tree need to be stored thoroughly before closed.(that's to: write back all)
+2. the way storing nodes in memory and diskfile is different.
+3. a tree is empty is equal to root == NULL. h = O(logt(n)) t = DEGREE
+4. a diagraph showing the degree relation:
+		keys		childs
+root		1~2t		2~2t+1
+IntlNode	t~2t		t~2t+1
+LeafNode	t~2t		0
+5. when a node changed in some parts, it should be dirty to be written back.Remember that a node is a store-unit, that means you should write the whole node back. Any pointer in memory should be replaced by real-values to store in diskfile.
+6. Before start coding, update according to the class-diagraph, MAXKN and MAXCN can be moved to Node.
+
+#################################################################################################################################################
+ways to save space:
+1. in Node, Bstr -> Bstr*, and use a void* to point to space storing store/flag/num...   when nodes are swaped, only store is required
+(information isLeaf will be stored in disk)
+	However, in this way, new operations will consume time!
+
+
+Abother way to save time:
+because most nodes will be read in and be virtual, consider reading all virtual nodes in when building tree, then later work will be faster!
+However, in general not all nodes will be used, and this way will consume much space!
+
+
+when Storage is constructed, disk information should be ready, and place treefp ahead of rootNode. when use read/write node/bstr, treefp should 
+be in the right place!
+
+there are three types of node:
+Node(store) -> simple node -EXPAND> real node -swap>virtual node -NORMAL> real node <OVER- all kinds of node
+
+it may be better to search in binary-way, in a node
+
+use father pointer will be convient, while consuming more space! What's more, pointing to father meaning a search to find brother! 
+Firstly, do as told to build a template! After this ,think how to utilize it. 
+
+It seems compilation with mutiple classes in different files, is a big problem!
+
+
+keys/values/childs need to extend one more? add in end if cause problem?
+produce big data to test, that's example.dat
+
+Work in 2015.3.1
+finish functions in Storage
+
+add MultiValue for a range_query(maybe also for search?): add, 
+getNext...done in Storage
+
+there are two time of read node, father to child, or leaves-list, every
+node's store is ID! To avoid build two same simple-node, search Node*s 
+keeped in Storage according to store. if found, not found.  Try best 
+to improve this search method, maybe hash? treap?(solved using preRead way)
+
+Questions in 2015.3.2
+keys can be contained both in child and father, no multiple release?
+it's not simple to ensure that all keys are in leaves, then only release leaves is ok...
+(need to deal in special remove case)
+
+all data in file is aligned to 4-Byte, easy to deal with
+better: each node's end is an empty block, waste!!
+operations in tree may change the NF, and in ~ to change NF_IM, NF_IV, write back before really delete
+
+Work in 2015.3.5
+modify operations in tree
+test and debug: producing big key-value data-set, check bounder(modify args)
+sum time and post
+
+Work in 2015.3.7
+check node-bounder, range-query, big-set
+simulate the swap-method, need to set buffer-size
+
+Work in 2015.3.7
+produce big set: key-value
+move to server to test
+
+Work in 2015.3.13-3.15
+test and debug in server(2G buffer, 10G set)
+expand range-query
+change char to unsigned char
+use valgrind to analyse the usage of memory
+(problem when visit array-element out-of-bound: both in static and dynamic, not error at once, but when objects die!	
+ one way is always request one more, adding 8 byte, another way is to modify addChild and other, dealing with this question)
+heap-update is time-consuming: better to do what must be done. originally dirty, not really changed?
+transfer's string can be freed? Generally all bstr's string is not safe, const char* is also not ok!
