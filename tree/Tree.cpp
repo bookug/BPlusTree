@@ -179,7 +179,7 @@ Tree::insert(Bstr* _key, Bstr* _value)
 		request += (_key->getLen() + _value->getLen());
 		p->setDirty();
 		this->TSM->updateHeap(p, p->getRank(), true);
-		//_key->clear();	//QUERY: if needed?
+		//_key->clear();	//TODO: it's needed!
 		_value->clear();
 	}
 	this->TSM->request(request);

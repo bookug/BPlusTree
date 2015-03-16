@@ -171,12 +171,13 @@ Storage::Address(unsigned _blocknum) const  //BETTER: inline function
 {
 	if(_blocknum == 0)
 		return 0;
-	else if(_blocknum < 0 || _blocknum > MAX_BLOCK_NUM)
+	else if(_blocknum > MAX_BLOCK_NUM)
 	{
 		//print(string("error in Address: Invalid blocknum ") + Util::int2string(_blocknum));
 		return -1;		//address should be non-negative
 	}
-	return (this->SuperNum+_blocknum-1)*BLOCK_SIZE;
+	//NOTICE: here should explictly use long
+	return (long)(this->SuperNum+_blocknum-1) * (long)BLOCK_SIZE;
 }
 
 unsigned
