@@ -194,6 +194,7 @@ Storage::AllocBlock()
 		return 0;
 	unsigned t = p->num;
 	this->freelist->next = p->next;
+	delete p;
 	return t;
 }
 
