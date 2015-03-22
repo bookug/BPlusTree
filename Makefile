@@ -1,14 +1,14 @@
 CC = g++
 CFLAGS = -Wall -Werror -c -g
-PROGRAMS = demo1 demo2 demo3 clean  
+PROGRAMS = small-demo produce big-demo clean  
 obj = Tree.o Storage.o Node.o IntlNode.o LeafNode.o Bstr.o Util.o Heap.o RangeValue.o
 all: $(PROGRAMS)
-demo1: main1.cpp $(obj)
-	$(CC) -g main1.cpp $(obj) -o demo1	
-demo2: main2.cpp $(obj)
-	$(CC) -g main2.cpp $(obj) -o demo2
-demo3: main3.cpp $(obj)
-	$(CC) -g main3.cpp $(obj) -o demo3
+small-demo: small-demo.cpp $(obj)
+	$(CC) -g small-demo.cpp $(obj) -o small-demo
+big-demo: big-demo.cpp $(obj)
+	$(CC) -g big-demo.cpp $(obj) -o big-demo
+produce: produce.cpp $(obj)
+	$(CC) -g produce.cpp $(obj) -o produce
 Tree.o: tree/Tree.cpp 
 	$(CC) $(CFLAGS) tree/Tree.cpp -o Tree.o
 Storage.o: storage/Storage.cpp
@@ -34,15 +34,13 @@ tags:
 	ctags -R
 run1:
 	make
-	./demo1
-run2: 
+	./small-demo
+run3: 
 	make
-	./demo2
-run3:
+	./big-demo
+run2:
 	make
-	./demo3
-newlog:
-	rm -f logs/default.log
+	./produce
 sumlines:
 	find . -name "*.[ch]*" | xargs wc -l
 tarball:

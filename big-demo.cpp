@@ -1,5 +1,5 @@
 /*************************************************************************
-  > File Name: main2.cpp
+  > File Name: big-demo.cpp
   > Author: syzz 
   > Mail: 1181955272@qq.com 
   > Created Time: 2015年03月06日 星期五 19时47分27秒
@@ -9,34 +9,10 @@
 #include "tree/Tree.h"
 using namespace std;
 
-#define LEN 10000
 #define NUM 1000000
 
-int main(int argc, char[][] argv)
+int main(int argc, char** argv)
 {
-	/* produce big set: key-value */
-	/*
-	   FILE* fp = fopen("logs/key-value.dat", "w+");
-	   srand((unsigned)time(NULL));
-	   unsigned cnt = 0, i = 0, j = 0, k = 0;
-	   char c;
-	   for(cnt = 0; cnt < NUM; ++cnt)
-	   {
-	   for(k = 0; k < 2; ++k)		//key and value
-	   {
-	   j = rand()%LEN + 1;		//the string length
-	   fwrite(&j, sizeof(unsigned), 1, fp);
-	   for(i = 0; i < j; ++i)
-	   {
-	   if(k == 0)
-	   c = rand()%26 + 'A';
-	   else
-	   c = rand()%26 + 'a';
-	   fputc(c, fp);	//the character: 0~255
-	   }
-	   }
-	   }
-	   */
 	Tree t("logs", "tree.dat", "build");
 	Bstr bstr[2];
 	const Bstr* bp;
