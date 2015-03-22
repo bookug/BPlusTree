@@ -21,8 +21,7 @@ int main(int argc, char** argv)
 	unsigned i, j, k;
 	FILE* fp = fopen("logs/key-value.dat", "rb");
 
-	t.print("TREE");
-/*
+	//t.print("TREE");
 	for(i = 0; i < NUM; ++i)
 	{
 		for(k = 0; k < 2; ++k)
@@ -34,14 +33,17 @@ int main(int argc, char** argv)
 			bstr[k].setStr(s);
 		}
 		printf("this is the %d-th pair\n", i);
-		 build part
+	/*	 build part
 		if(t.insert(&bstr[0], &bstr[1]))
 			printf("Insert Success\n");
 		else
 			printf("Insert Fail\n");
-
+*/
 		if(t.search(&bstr[0], bp))
 			printf("Search Success\n");
+		else
+			printf("Search Fail\n");
+		/*
 		if(i % 9 == 0)
 		{
 			if(t.remove(&bstr[0]))
@@ -56,14 +58,15 @@ int main(int argc, char** argv)
 			printf("Remove Success\n");
 		else
 			printf("Remove Fail\n");
+			*/
 	}
 	bstr[0].clear();
 	bstr[1].clear();
 	printf("Operation Done, Now to print Tree\n");
-	t.print("TREE");
+	t.print("tree");
 	printf("Tree is Printed, Now to Save\n");
 	t.save();
 	printf("Tree is Saved, Now to delete\n");
-	*/
+	
 	return 0;
 }
