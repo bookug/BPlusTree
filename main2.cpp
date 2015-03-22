@@ -12,7 +12,7 @@ using namespace std;
 #define LEN 10000
 #define NUM 1000000
 
-int main(int argc, char** argv)
+int main(int argc, char[][] argv)
 {
 	/* produce big set: key-value */
 	/*

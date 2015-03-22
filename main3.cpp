@@ -8,7 +8,7 @@
 #include "util/Util.h"
 using namespace std;
 
-int main(int argc, char** argv)
+int main(int argc, char[][] argv)
 {
 	int ret1 = Util::compare("TBJFINZABY", 10, "PVBBFMDOD", 9);
 	int ret2 = Util::compare("PVBBFMDOD", 9, "JMSKUAJWG", 9);

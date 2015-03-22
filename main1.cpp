@@ -9,7 +9,7 @@
 using namespace std;
 
 int 
-main(int argc, char **argv)
+main(int argc, char[][]argv)
 {
 	//freopen("logs/default.log", "a", stdout);
 	//print basic information of tree
