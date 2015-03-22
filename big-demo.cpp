@@ -13,12 +13,17 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-	Tree t("logs", "tree.dat", "build");
+	//Tree t("logs", "tree.dat", "build");
+	Tree t("logs", "tree.dat", "open");
 	Bstr bstr[2];
 	const Bstr* bp;
 	char* s;
 	unsigned i, j, k;
 	FILE* fp = fopen("logs/key-value.dat", "rb");
+
+	t.print("TREE");
+	system("pause");
+
 	for(i = 0; i < NUM; ++i)
 	{
 		for(k = 0; k < 2; ++k)
@@ -30,6 +35,7 @@ int main(int argc, char** argv)
 			bstr[k].setStr(s);
 		}
 		printf("this is the %d-th pair\n", i);
+		/* build part
 		if(t.insert(&bstr[0], &bstr[1]))
 			printf("Insert Success\n");
 		else
@@ -44,8 +50,13 @@ int main(int argc, char** argv)
 			else
 				printf("Remove Fail\n");
 		}
+		*/
 		//t.print("TREE");
-
+		/* open part */
+		if(t.remove(&bstr[0]))
+			printf("Remove Success\n");
+		else
+			printf("Remove Fail\n");
 	}
 	bstr[0].clear();
 	bstr[1].clear();
