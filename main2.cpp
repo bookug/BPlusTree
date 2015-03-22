@@ -76,7 +76,7 @@ int main(int argc, char** argv)
 	printf("Operation Done, Now to print Tree\n");
 	t.print("TREE");
 	printf("Tree is Printed, Now to Save\n");
-	//t.save();
+	t.save();//DEBUG!!!!!memory lost
 	printf("Tree is Saved, Now to delete\n");
 	return 0;
 }

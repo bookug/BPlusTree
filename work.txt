@@ -130,3 +130,9 @@ expand range-query function: if accurate?
 Work in 2015.3.19-3.21
 ensure there are no fatal bugs!
 analyse and improve the performance
+
+Work in 2015.3.22-3.25
+fix almostly all bugs
+
+Project should be improved in 3.26-3.31
+The whole work is expected to be done before 4.1

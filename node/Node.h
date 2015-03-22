@@ -14,7 +14,7 @@
 class Node       				//abstract basic class 
 {
 public:
-	static const unsigned DEGREE = 2 * 64;					//the degree of B+ tree, restricted in enev.(100 is another type of degree)
+	static const unsigned DEGREE = 2 * 60;					//the degree of B+ tree, restricted in enev.(100 is another type of degree)
 	static const unsigned MAX_CHILD_NUM = DEGREE;		
 	static const unsigned MIN_CHILD_NUM = DEGREE >> 1;
 	static const unsigned MAX_KEY_NUM = MAX_CHILD_NUM - 1;	//max key-num
