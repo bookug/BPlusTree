@@ -17,6 +17,9 @@ public:
 	bool operator > (const Bstr& _bstr);
 	bool operator < (const Bstr& _bstr);
 	bool operator == (const Bstr& _bstr);
+	bool operator <= (const Bstr& _bstr);
+	bool operator >= (const Bstr& _bstr);
+	bool operator != (const Bstr& _bstr);
 	unsigned getLen() const;
 	void setLen(unsigned _len);
 	char* getStr() const;

@@ -22,6 +22,7 @@ main(int argc, char** argv)
 	printf("size of Heap: %lu\n", sizeof(Heap));
 	printf("size of Storage: %lu\n", sizeof(Storage));
 	printf("DEGREE: %d\n", Node::DEGREE);		
+	printf("HEAPSIZE: %d\n", Storage::HEAP_SIZE);
 
 	//build/open tree, operate to test
 	//Tree t("logs", "tree2.dat", "build");

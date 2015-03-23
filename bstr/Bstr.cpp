@@ -15,11 +15,11 @@ Bstr::Bstr(char* _str, unsigned _len)
 	this->str = _str;
 }
 /*
-Bstr::Bstr(Storage* TSM)
-{
-	TSM->readBstr(this);
-}
-*/
+   Bstr::Bstr(Storage* TSM)
+   {
+   TSM->readBstr(this);
+   }
+   */
 bool 
 Bstr::operator > (const Bstr& _bstr)
 {
@@ -45,6 +45,36 @@ Bstr::operator == (const Bstr& _bstr)
 {
 	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
 	if(res == 0)
+		return true;
+	else
+		return false;
+}
+
+bool
+Bstr::operator <= (const Bstr& _bstr)
+{
+	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
+	if(res <= 0)
+		return true;
+	else
+		return false;
+}
+
+bool
+Bstr::operator >= (const Bstr& _bstr)
+{
+	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
+	if(res >= 0)
+		return true;
+	else
+		return false;
+}
+
+bool
+Bstr::operator != (const Bstr& _bstr)
+{
+	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
+	if(res != 0)
 		return true;
 	else
 		return false;

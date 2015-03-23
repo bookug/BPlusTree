@@ -131,8 +131,20 @@ Work in 2015.3.19-3.21
 ensure there are no fatal bugs!
 analyse and improve the performance
 
+Bugs are waiting:
+writeNode -> FreeBlock -> new:   problem comes
+leaf/intl nodes: add/sub, real or not?
+How to Better:
+utilize the search of heap(using another heap)
+no need to use prev
+not use one more position, but consider in detail
+
 Work in 2015.3.22-3.25
+finish the range_query
 fix almostly all bugs
 
 Project should be improved in 3.26-3.31
 The whole work is expected to be done before 4.1
+Later:
+sort and draw a better graph
+

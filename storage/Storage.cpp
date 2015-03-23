@@ -92,10 +92,10 @@ Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 }
 
 bool
-Storage::preRead(Node*& _root, Node*& _leaves)		//pre-read and build whole tree
-{	//set root(in memory) and leaves
+Storage::preRead(Node*& _root, Node*& _leaves_head, Node*& _leaves_tail)		//pre-read and build whole tree
+{	//set root(in memory) and leaves_head
 	//TODO: false when exceed memory
-	_leaves = _root = NULL;
+	_leaves_head = _root = NULL;
 	if(ftell(this->treefp) == 0)	//root is null
 	{
 		return true;
@@ -153,13 +153,13 @@ Storage::preRead(Node*& _root, Node*& _leaves)		//pre-read and build whole tree
 		nodes[pos] = p;
 		pos++;
 	}
-	//set leaves and read root, which is always keeped in-mem
+	//set leaves_head and read root, which is always keeped in-mem
 	p = _root;
 	while(!p->isLeaf())
 	{
 		p = p->getChild(0);
 	}
-	_leaves = p;
+	_leaves_head = p;
 	int memory = 0;
 	this->readNode(_root, &memory);
 	this->request(memory);

@@ -43,7 +43,7 @@ private:
 public:
 	Storage();
 	Storage(std::string& _filepath, std::string& _mode, unsigned* _height);//create a fixed-size file or open an existence
-	bool preRead(Node*& _root, Node*& _leaves);		//read and build all nodes, only root in memory
+	bool preRead(Node*& _root, Node*& _leaves_head, Node*& _leaves_tail);		//read and build all nodes, only root in memory
 	bool readNode(Node* _np, int* _request);	//read, if virtual 
 	bool createNode(Node*& _np);		//use fp to create a new node
 	//NOTICE(if children and child not exist, build children's Nodes)

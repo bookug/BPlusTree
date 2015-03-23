@@ -15,8 +15,9 @@ class Tree
 private:
 	unsigned int height;		//0 indicates an empty tree
 	Node* root;
-	Node* leaves;				//the list of LeafNode
-	std::string mode;             		//BETTER(to use enum)
+	Node* leaves_head;			//the head of LeafNode-list
+	Node* leaves_tail;			//the tail of LeafNode-list
+	std::string mode;           //BETTER(to use enum)
 	//QUERY(how to extend: new or end-pointer?)
 	Storage* TSM;           	//Tree-Storage-Manage
 	RangeValue VALUES;			//just for range query
