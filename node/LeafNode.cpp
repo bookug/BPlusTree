@@ -83,7 +83,7 @@ LeafNode::getValue(int _index) const
 }
 
 bool
-LeafNode::setValue(const Bstr* _value, int _index)
+LeafNode::setValue(const Bstr* _value, int _index, bool ifcopy)
 {
 	int num = this->getNum();
 	if(_index < 0 || _index >= num)
@@ -92,12 +92,15 @@ LeafNode::setValue(const Bstr* _value, int _index)
 		return false;
 	}
 	this->values[_index].release(); //NOTICE: only used in modify
-	this->values[_index] = *_value;
+	if(ifcopy)
+		this->values[_index].copy(_value);
+	else
+		this->values[_index] = *_value;
 	return true;
 }
 
 bool 
-LeafNode::addValue(const Bstr* _value, int _index)
+LeafNode::addValue(const Bstr* _value, int _index, bool ifcopy)
 {
 	int num = this->getNum();
 	if(_index < 0 || _index > num)
@@ -108,7 +111,10 @@ LeafNode::addValue(const Bstr* _value, int _index)
 	int i;
 	for(i = num-1; i >= _index; --i)
 		this->values[i+1] = this->values[i];
-	this->values[_index] = *_value;
+	if(ifcopy)
+		this->values[_index].copy(_value);
+	else
+		this->values[_index] = *_value;
 	return true; 
 }
 

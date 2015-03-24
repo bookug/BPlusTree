@@ -59,9 +59,9 @@ int main(int argc, char** argv)
 		else
 			printf("Remove Fail\n");
 			*/
+		bstr[0].release();
+		bstr[1].release();
 	}
-	bstr[0].clear();
-	bstr[1].clear();
 	printf("Operation Done, Now to print Tree\n");
 	t.print("tree");
 	printf("Tree is Printed, Now to Save\n");

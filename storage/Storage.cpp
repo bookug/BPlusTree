@@ -95,7 +95,7 @@ bool
 Storage::preRead(Node*& _root, Node*& _leaves_head, Node*& _leaves_tail)		//pre-read and build whole tree
 {	//set root(in memory) and leaves_head
 	//TODO: false when exceed memory
-	_leaves_head = _root = NULL;
+	_leaves_tail = _leaves_head = _root = NULL;
 	if(ftell(this->treefp) == 0)	//root is null
 	{
 		return true;
@@ -153,13 +153,19 @@ Storage::preRead(Node*& _root, Node*& _leaves_head, Node*& _leaves_tail)		//pre-
 		nodes[pos] = p;
 		pos++;
 	}
-	//set leaves_head and read root, which is always keeped in-mem
+	//set leaves and read root, which is always keeped in-mem
 	p = _root;
 	while(!p->isLeaf())
 	{
 		p = p->getChild(0);
 	}
 	_leaves_head = p;
+	p = _root;
+	while(!p->isLeaf())
+	{
+		p = p->getChild(p->getNum());
+	}
+	_leaves_tail = p;
 	int memory = 0;
 	this->readNode(_root, &memory);
 	this->request(memory);
@@ -454,6 +460,9 @@ Storage::writeTree(Node* _root)	//write the whole tree back and close treefp
 	}
 
 	unsigned i, j, t;
+	//QUERY: another way to write all nodes back is to print out all nodes in heap
+	//but this method will cause no node in heap any more, while operations may be 
+	//afetr tree-saving.	Which method is better?
 	//write nodes recursively using stack, including root-num
 	if(_root != NULL)
 	{

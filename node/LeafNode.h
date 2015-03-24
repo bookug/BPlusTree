@@ -26,8 +26,8 @@ public:
 	Node* getPrev() const;
 	Node* getNext() const;
 	const Bstr* getValue(int _index) const;	
-	bool setValue(const Bstr* _value, int _index);
-	bool addValue(const Bstr* _value, int _index);
+	bool setValue(const Bstr* _value, int _index, bool ifcopy = false);
+	bool addValue(const Bstr* _value, int _index, bool ifcopy = false);
 	bool subValue(int _index, bool ifdel = false);
 	void setPrev(Node* _prev);
 	void setNext(Node* _next);

@@ -23,7 +23,7 @@ main(int argc, char** argv)
 	printf("size of Storage: %lu\n", sizeof(Storage));
 	printf("DEGREE: %d\n", Node::DEGREE);		
 	printf("HEAPSIZE: %d\n", Storage::HEAP_SIZE);
-
+/*
 	//build/open tree, operate to test
 	//Tree t("logs", "tree2.dat", "build");
 	Tree t("logs", "tree2.dat", "open");
@@ -67,7 +67,7 @@ main(int argc, char** argv)
 			printf("modify successfully!\n");
 		//bp3->print("bstr");		//can reserve after modify
 	}
-/*
+
 	for(i = 0; i < 7; ++i)
 	{
 		bp1->setLen(1);
@@ -76,7 +76,7 @@ main(int argc, char** argv)
 		bp1->setStr(s);
 		t.remove(bp1);
 	}
-*/	
+	
 	//test range query
 	bp1->setLen(1);
 	bp2->setLen(1);
@@ -94,5 +94,6 @@ main(int argc, char** argv)
 
 	t.print("tree");//NOTICE: read when needed, not sum memory 
 	t.save();	
+	*/
 	return 0;
 }

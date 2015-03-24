@@ -134,9 +134,10 @@ analyse and improve the performance
 Bugs are waiting:
 writeNode -> FreeBlock -> new:   problem comes
 leaf/intl nodes: add/sub, real or not?
+how about the bounder?
 How to Better:
 utilize the search of heap(using another heap)
-no need to use prev
+no need to use prev?
 not use one more position, but consider in detail
 
 Work in 2015.3.22-3.25

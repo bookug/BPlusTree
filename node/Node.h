@@ -14,7 +14,7 @@
 class Node       				//abstract basic class 
 {
 public:
-	static const unsigned DEGREE = 2 * 60;					//the degree of B+ tree, restricted in enev.(100 is another type of degree)
+	static const unsigned DEGREE = 2 * 63;					//the degree of B+ tree, restricted in enev.(100 is another type of degree)
 	static const unsigned MAX_CHILD_NUM = DEGREE;		
 	static const unsigned MIN_CHILD_NUM = DEGREE >> 1;
 	static const unsigned MAX_KEY_NUM = MAX_CHILD_NUM - 1;	//max key-num
@@ -74,8 +74,8 @@ public:
 	virtual Node* getPrev() const { return NULL; };
 	virtual Node* getNext() const { return NULL; };
 	virtual const Bstr* getValue(int _index) const { return NULL; };
-	virtual bool setValue(const Bstr* _value, int _index) { return true; };
-	virtual bool addValue(const Bstr* _value, int _index) { return true; };
+	virtual bool setValue(const Bstr* _value, int _index, bool ifcopy = false) { return true; };
+	virtual bool addValue(const Bstr* _value, int _index, bool ifcopy = false) { return true; };
 	virtual bool subValue(int _index, bool ifdel = false) { return true;};
 	virtual void setPrev(Node* _prev) {};
 	virtual void setNext(Node* _next) {};
