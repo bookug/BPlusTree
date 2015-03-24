@@ -7,7 +7,7 @@ Heap::Heap()
 {
 	this->length = this->size = 0;
 	this->heap = NULL;
-	this->heap = NULL;
+	this->hash = NULL;
 }
 
 Heap::Heap(unsigned _size)

@@ -9,12 +9,16 @@
 #include "tree/Tree.h"
 using namespace std;
 
+#define BUILD 1
 #define NUM 1000000
 
 int main(int argc, char** argv)
 {
-	//Tree t("logs", "tree.dat", "build");
-	Tree t("logs", "tree.dat", "open");
+	Tree t;
+	if(BUILD)
+		t = Tree("logs", "tree.dat", "build");
+	else
+		t = Tree("logs", "tree.dat", "open");
 	Bstr bstr[2];
 	const Bstr* bp;
 	char* s;
@@ -33,17 +37,19 @@ int main(int argc, char** argv)
 			bstr[k].setStr(s);
 		}
 		printf("this is the %d-th pair\n", i);
-	/*	 build part
-		if(t.insert(&bstr[0], &bstr[1]))
-			printf("Insert Success\n");
-		else
-			printf("Insert Fail\n");
-*/
+		if(BUILD)
+		{
+			if(t.insert(&bstr[0], &bstr[1]))
+				printf("Insert Success\n");
+			else
+				printf("Insert Fail\n");
+		}
+
 		if(t.search(&bstr[0], bp))
 			printf("Search Success\n");
 		else
 			printf("Search Fail\n");
-		/*
+
 		if(i % 9 == 0)
 		{
 			if(t.remove(&bstr[0]))
@@ -51,22 +57,16 @@ int main(int argc, char** argv)
 			else
 				printf("Remove Fail\n");
 		}
-		
-		t.print("TREE");
-		 open part 
-		if(t.remove(&bstr[0]))
-			printf("Remove Success\n");
-		else
-			printf("Remove Fail\n");
-			*/
+
+		//t.print("TREE");
 		bstr[0].release();
 		bstr[1].release();
 	}
 	printf("Operation Done, Now to print Tree\n");
-	t.print("tree");
+	t.print("TREE");
 	printf("Tree is Printed, Now to Save\n");
 	t.save();
 	printf("Tree is Saved, Now to delete\n");
-	
+
 	return 0;
 }

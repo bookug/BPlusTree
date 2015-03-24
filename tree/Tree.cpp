@@ -15,7 +15,7 @@ Tree::Tree()
 	root = NULL;
 	leaves_head = NULL;
 	leaves_tail = NULL;
-	TSM = new Storage;
+	TSM = NULL;
 	storepath = "";
 	filename = "";
 }
