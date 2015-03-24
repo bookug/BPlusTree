@@ -7,18 +7,27 @@ Heap::Heap()
 {
 	this->length = this->size = 0;
 	this->heap = NULL;
+	this->heap = NULL;
 }
 
 Heap::Heap(unsigned _size)
 {
 	this->length = 0;
 	this->size = _size;
-	this->heap = new Node*[this->size];
+	this->heap = (Node**)malloc(this->size * sizeof(Node*));	//not use 4 or 8
 	if(this->heap == NULL)
 	{
 		this->print("error in Heap: Allocation fail!");
 		exit(1);
 	}
+	/*
+	this->npmap = (Map*)malloc(this->size * sizeof(struct Map));
+	if(this->npmap == NULL)
+	{
+		this->print("error in Heap: Allocation fail!");
+		exit(1);
+	}
+	*/
 }
 
 Node*
@@ -59,6 +68,14 @@ Heap::insert(Node* _np)
 			print("error in isert: Reallocation fail!");
 			return false;
 		}
+		/*
+		this->npmap = (struct Map*)realloc(this->npmap, 2 * this->size * sizeof(struct Map));
+		if(this->npmap == NULL)
+		{
+			print("error in insert: Reallocation fail!");
+			return false;
+		}
+		*/
 		this->size = 2 * this->size;
 	}
 	unsigned i = this->length, j;
@@ -68,6 +85,7 @@ Heap::insert(Node* _np)
 		if(_np->getRank() >= this->heap[j]->getRank())
 			break;
 		heap[i] = heap[j];
+		//this->npmap[k].pos = i;			//adjust the position
 		i = j;
 	}
 	this->heap[i] = _np;

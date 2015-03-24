@@ -143,6 +143,7 @@ not use one more position, but consider in detail
 Work in 2015.3.22-3.25
 finish the range_query
 fix almostly all bugs
+what's approviate to initial the heap size?
 
 Project should be improved in 3.26-3.31
 The whole work is expected to be done before 4.1

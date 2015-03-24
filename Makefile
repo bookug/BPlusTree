@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -Wall -Werror -c -g
 PROGRAMS = small-demo produce big-demo clean  
-obj = Tree.o Storage.o Node.o IntlNode.o LeafNode.o Bstr.o Util.o Heap.o RangeValue.o
+obj = Tree.o Storage.o Node.o IntlNode.o LeafNode.o Bstr.o Util.o Heap.o Hash.o RangeValue.o
 all: $(PROGRAMS)
 small-demo: small-demo.cpp $(obj)
 	$(CC) -g small-demo.cpp $(obj) -o small-demo
@@ -23,6 +23,8 @@ Bstr.o: bstr/Bstr.cpp
 	$(CC) $(CFLAGS) bstr/Bstr.cpp -o Bstr.o
 Util.o: util/Util.cpp
 	$(CC) $(CFLAGS) util/Util.cpp -o Util.o
+Hash.o: hash/Hash.cpp
+	$(CC) $(CFLAGS) hash/Hash.cpp -o Hash.o
 Heap.o: heap/Heap.cpp 
 	$(CC) $(CFLAGS) heap/Heap.cpp -o Heap.o
 RangeValue.o: rangevalue/RangeValue.cpp
