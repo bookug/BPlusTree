@@ -8,6 +8,8 @@
 #include "node/LeafNode.h"
 using namespace std;
 
+#define BUILD 0
+
 int 
 main(int argc, char** argv)
 {
@@ -23,77 +25,89 @@ main(int argc, char** argv)
 	printf("size of Storage: %lu\n", sizeof(Storage));
 	printf("DEGREE: %d\n", Node::DEGREE);		
 	printf("HEAPSIZE: %d\n", Storage::HEAP_SIZE);
-/*
-	//build/open tree, operate to test
-	//Tree t("logs", "tree2.dat", "build");
-	Tree t("logs", "tree2.dat", "open");
+
+	Tree* t;
+	if(BUILD)
+		t = new Tree("logs", "tree.dat", "build");
+	else
+		t = new Tree("logs", "tree.dat", "open");
 
 	Bstr* bp1 = new Bstr(NULL, 0);
 	Bstr* bp2 = new Bstr(NULL, 0);
 	int i;
 	char* s;
+	const Bstr* bp3;
+	if(BUILD)
+	{
+		for(i = 0; i < 10; ++i)
+		{
+			bp1->setLen(1);
+			bp2->setLen(1);
+			s = new char[1];
+			s[0] = 'A' + i;
+			bp1->setStr(s);
+			s = new char[1];
+			s[0] = 'a' + i;
+			bp2->setStr(s);
+			printf("this is the %dth loop\n", i);
+			if(BUILD)
+				t->insert(bp1, bp2);
+			//printf("the height is %d\n", t.getHeight());
+			bp1->release();
+			bp2->release();
+		}	
 
-	for(i = 0; i < 10; ++i)
+		for(i = 0; i < 7; ++i)
+		{
+			bp1->setLen(1);
+			s = new char[1];
+			s[0] = 'A' + i;
+			bp1->setStr(s);
+			if(t->search(bp1, bp3))
+				bp3->print("bstr");
+			bp2->setLen(1);
+			s = new char[1];
+			s[0] = 'b' + i;
+			bp2->setStr(s);
+			if(!t->modify(bp1, bp2))
+				printf("error in modify!\n");
+			else 
+				printf("modify successfully!\n");
+			bp3->print("BSTR");		//can reserve after modify
+			bp1->release();
+			bp2->release();
+		}
+	}
+	else
 	{
 		bp1->setLen(1);
 		bp2->setLen(1);
 		s = new char[1];
-		s[0] = 'A' + i;
+		s[0] = 'B';
 		bp1->setStr(s);
 		s = new char[1];
-		s[0] = 'a' + i;
+		s[0] = 'G';
 		bp2->setStr(s);
-		//printf("this is the %dth loop\n", i);
-		t.insert(bp1, bp2);
-		//printf("the height is %d\n", t.getHeight());
-	}	
+		t->range_query(bp1, bp2);
+		while((bp3=t->getRangeValue()) != NULL)
+		{
+			bp3->print("BSTR");
+		}
+		bp1->release();
+		bp2->release();
 
- 	const Bstr* bp3;// = new Bstr(NULL, 0);
-	for(i = 0; i < 7; ++i)
-	{
-		bp1->setLen(1);
-		s = new char[1];
-		s[0] = 'A' + i;
-		bp1->setStr(s);
-		if(t.search(bp1, bp3))
-			bp3->print("bstr");
-		bp2->setLen(1);
-		s = new char[1];
-		s[0] = 'b' + i;
-		bp2->setStr(s);
-		if(!t.modify(bp1, bp2))
-			printf("error in modify!\n");
-		else 
-			printf("modify successfully!\n");
-		//bp3->print("bstr");		//can reserve after modify
+		for(i = 0; i < 7; ++i)
+		{
+			bp1->setLen(1);
+			s = new char[1];
+			s[0] = 'A' + i;
+			bp1->setStr(s);
+			t->remove(bp1);
+			bp1->release();
+		}
 	}
+	t->print("TREE");//NOTICE: read when needed, not sum memory 
+	t->save();	
 
-	for(i = 0; i < 7; ++i)
-	{
-		bp1->setLen(1);
-		s = new char[1];
-		s[0] = 'A' + i;
-		bp1->setStr(s);
-		t.remove(bp1);
-	}
-	
-	//test range query
-	bp1->setLen(1);
-	bp2->setLen(1);
-	s = new char[1];
-	s[0] = 'B';
-	bp1->setStr(s);
-	s = new char[1];
-	s[0] = 'G';
-	bp2->setStr(s);
-	t.range_query(bp1, bp2);
-	while((bp3=t.getRangeValue()) != NULL)
-	{
-		bp3->print("bstr");
-	}
-
-	t.print("tree");//NOTICE: read when needed, not sum memory 
-	t.save();	
-	*/
 	return 0;
 }

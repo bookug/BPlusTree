@@ -46,6 +46,6 @@ run2:
 sumlines:
 	find . -name "*.[ch]*" | xargs wc -l
 tarball:
-	tar -czvf btree.tar.gz tree storage node bstr util heap rangevalue Makefile main*.cpp
+	tar -czvf btree.tar.gz tree storage node bstr util heap hash rangevalue Makefile *.cpp
 send:
-	scp btree.tar.gz root@59.108.48.36:/home/zengli/btree/
+	scp btree.tar.gz root@172.31.19.15:/media/wip/zengli/btree/

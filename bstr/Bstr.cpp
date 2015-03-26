@@ -120,9 +120,10 @@ Bstr::clear()
 }
 
 void
-Bstr::release() const
+Bstr::release()
 {
 	free(this->str);	//ok to be null, do nothing
+	clear();
 }
 
 Bstr::~Bstr()	

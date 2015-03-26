@@ -2,7 +2,7 @@
   > File Name: big-demo.cpp
   > Author: syzz 
   > Mail: 1181955272@qq.com 
-  > Created Time: 2015年03月06日 星期五 19时47分27秒
+  > Create Time: 2015年03月06日 星期五 19时47分27秒
  ************************************************************************/
 
 #include "util/Util.h"
@@ -14,11 +14,11 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-	Tree t;
+	Tree* t;		//NOTICE:problem if using value!
 	if(BUILD)
-		t = Tree("logs", "tree.dat", "build");
+		t = new Tree("logs", "tree.dat", "build");
 	else
-		t = Tree("logs", "tree.dat", "open");
+		t = new Tree("logs", "tree.dat", "open");
 	Bstr bstr[2];
 	const Bstr* bp;
 	char* s;
@@ -39,33 +39,33 @@ int main(int argc, char** argv)
 		printf("this is the %d-th pair\n", i);
 		if(BUILD)
 		{
-			if(t.insert(&bstr[0], &bstr[1]))
+			if(t->insert(&bstr[0], &bstr[1]))
 				printf("Insert Success\n");
 			else
 				printf("Insert Fail\n");
 		}
 
-		if(t.search(&bstr[0], bp))
+		if(t->search(&bstr[0], bp))
 			printf("Search Success\n");
 		else
 			printf("Search Fail\n");
-
+/*
 		if(i % 9 == 0)
 		{
-			if(t.remove(&bstr[0]))
+			if(t->remove(&bstr[0]))
 				printf("Remove Success\n");
 			else
 				printf("Remove Fail\n");
 		}
-
-		//t.print("TREE");
+*/
+		t->print("tree");
 		bstr[0].release();
 		bstr[1].release();
 	}
 	printf("Operation Done, Now to print Tree\n");
-	t.print("TREE");
+	t->print("tree");
 	printf("Tree is Printed, Now to Save\n");
-	t.save();
+	t->save();
 	printf("Tree is Saved, Now to delete\n");
 
 	return 0;

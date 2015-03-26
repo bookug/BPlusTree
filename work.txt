@@ -152,5 +152,6 @@ sort and draw a better graph
 
 Question in 2015.3.24
 when a node's property is changed, how to find this node in heap? To better the searching,
-another heap, use hash(finding space will be problem, using list?)?
-
+another heap, use hash(finding space will be problem, using list?)? STL map?
+in big-demo, insert-search-remove-release: sometimes causing double-free!(the question is
+		in remove-operation)

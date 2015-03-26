@@ -103,6 +103,7 @@ Tree::search(const Bstr* _key, const Bstr*& _value)
 	bstr.clear();
 	return true;
 }
+
 bool
 Tree::insert(Bstr* _key, Bstr* _value)
 {

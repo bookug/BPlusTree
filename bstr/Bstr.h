@@ -24,7 +24,7 @@ public:
 	void setLen(unsigned _len);
 	char* getStr() const;
 	void setStr(char* _str);		//reuse a Bstr
-	void release() const;					//release memory
+	void release();					//release memory
 	void clear();					//set str/length to 0
 	void copy(const Bstr* _bp);
 	~Bstr();
