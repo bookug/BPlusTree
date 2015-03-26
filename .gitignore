@@ -29,6 +29,10 @@
 produce
 *demo
 
+# User scripts
+*.sh
+*.csh
+
 # Produced logs
-*.log
-*.dat
+*.log*
+*.dat*
