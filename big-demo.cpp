@@ -46,7 +46,13 @@ int main(int argc, char** argv)
 		}
 
 		if(t->search(&bstr[0], bp))
+		{
 			printf("Search Success\n");
+			if(bstr[1] == *bp)
+				printf("Matched Perfectly\n");
+			else
+				printf("Not Matched\n");
+		}
 		else
 			printf("Search Fail\n");
 		if(!BUILD)
