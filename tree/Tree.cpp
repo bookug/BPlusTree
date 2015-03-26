@@ -18,6 +18,7 @@ Tree::Tree()
 	TSM = NULL;
 	storepath = "";
 	filename = "";
+	transfer_size = 0;
 }
 
 Tree::Tree(const string& _storepath, const string& _filename, const char* _mode)
@@ -32,6 +33,8 @@ Tree::Tree(const string& _storepath, const string& _filename, const char* _mode)
 		this->TSM->preRead(this->root, this->leaves_head, this->leaves_tail);
 	else
 		this->root = NULL;
+	this->transfer.setStr((char*)malloc(1 << 20));
+	this->transfer_size = 1 << 20;		//initialied to 1 << 20
 }
 
 string
@@ -44,13 +47,14 @@ void
 Tree::CopyToTransfer(const Bstr* _bstr)
 {
 	unsigned length = _bstr->getLen();
-	if(length > this->transfer.getLen())
+	if(length + 1 > this->transfer_size)
 	{
 		transfer.release();
-		transfer.setLen(length);
 		transfer.setStr((char*)malloc(length+1));
+		this->transfer_size = length + 1;	//one more byte: convenient to add \0
 	}
 	memcpy(this->transfer.getStr(), _bstr->getStr(), length);
+	this->transfer.setLen(length);
 }
 
 unsigned 

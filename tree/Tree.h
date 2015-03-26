@@ -30,6 +30,7 @@ private:
 	//lock to every key/value. However, modify requires a lock for a
 	//key/value, and multiple search for different keys are ok!!!
 	Bstr transfer;				//to transfer value searched
+	unsigned transfer_size;
 	std::string storepath;
 	std::string filename;      	//ok for user to change
 	/* some private functions */

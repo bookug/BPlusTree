@@ -17,6 +17,7 @@ class RangeValue
 private:
 	FILE* fp;
 	Bstr transfer;
+	unsigned transfer_size;
 public:
 	RangeValue();
 	void reset();

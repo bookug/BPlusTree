@@ -11,6 +11,8 @@ using namespace std;
 RangeValue::RangeValue()
 {
 	this->fp = NULL;
+	this->transfer.setStr((char*)malloc(1 << 20));
+	this->transfer_size = 1 << 20;
 }
 
 void
@@ -50,13 +52,14 @@ RangeValue::read()
 	fread(&len, sizeof(unsigned), 1, this->fp);
 	if(feof(this->fp))
 		return NULL;		//indicate the end
-	if(len > transfer.getLen())
+	if(len + 1 > this->transfer_size)
 	{
 		transfer.release();
-		transfer.setLen(len);
 		transfer.setStr((char*)malloc(len+1));
+		this->transfer_size = len + 1;
 	}
 	fread(transfer.getStr(), sizeof(char), len, this->fp);
+	transfer.setLen(len);
 	return &transfer;
 }
 
@@ -64,6 +67,6 @@ RangeValue::~RangeValue()
 {
 	if(this->fp != NULL)
 		fclose(this->fp);
-	//transfer wiil de deleted as Bstr
+	//transfer will de deleted as Bstr
 }
 
