@@ -93,10 +93,11 @@ Tree::search(const Bstr* _key, const Bstr*& _value)
 	Bstr bstr = *_key;	//not to modify its memory
 	int store;	
 	Node* ret = this->find(_key, &store, false);
-	if(ret == NULL || store == -1)	//tree is empty or not found
-		return false;	
-	if(bstr != *(ret->getKey(store)))
-		return false;	//not found
+	if(ret == NULL || store == -1 || bstr != *(ret->getKey(store)))	//tree is empty or not found
+	{
+		bstr.clear();
+		return false;
+	}
 	this->CopyToTransfer(ret->getValue(store));	//not sum to request
 	_value = &transfer;
 	this->TSM->request(request);
@@ -211,10 +212,11 @@ Tree::modify(const Bstr* _key, Bstr* _value)
 	Bstr bstr = *_key;
 	int store;
 	Node* ret = this->find(_key, &store, true);
-	if(ret == NULL || store == -1)	//tree is empty or not found
+	if(ret == NULL || store == -1 || bstr != *(ret->getKey(store)))	//tree is empty or not found
+	{
+		bstr.clear();
 		return false;
-	if(bstr != *(ret->getKey(store)))
-		return false;				//not found
+	}
 	unsigned len = ret->getValue(store)->getLen();
 	ret->setValue(_value, store, true);
 	request += (_value->getLen()-len);

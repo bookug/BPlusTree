@@ -9,8 +9,8 @@
 #include "tree/Tree.h"
 using namespace std;
 
-#define BUILD 1
-#define NUM 1000000
+#define BUILD 0
+#define NUM 100000
 
 int main(int argc, char** argv)
 {
@@ -49,16 +49,17 @@ int main(int argc, char** argv)
 			printf("Search Success\n");
 		else
 			printf("Search Fail\n");
-/*
-		if(i % 9 == 0)
+		if(!BUILD)
 		{
-			if(t->remove(&bstr[0]))
-				printf("Remove Success\n");
-			else
-				printf("Remove Fail\n");
+			if(i % 9 == 0)
+			{
+				if(t->remove(&bstr[0]))
+					printf("Remove Success\n");
+				else
+					printf("Remove Fail\n");
+			}
 		}
-*/
-		t->print("tree");
+		//t->print("tree");
 		bstr[0].release();
 		bstr[1].release();
 	}
