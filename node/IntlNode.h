@@ -11,7 +11,7 @@
 class IntlNode: public Node
 {
 private:
-	Node* childs[MAX_CHILD_NUM];			
+	Node* childs[MAX_CHILD_NUM+1];	//BETTER: here waste 8-bytes to avoid bugs!
 public:
 	IntlNode();
 	IntlNode(bool isVirtual);

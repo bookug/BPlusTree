@@ -57,7 +57,7 @@ int main(int argc, char** argv)
 			printf("Search Fail\n");
 		if(!BUILD)
 		{
-			if(i % 9 == 0)
+			if(i)	//% 2 3 5 7 9 == 0
 			{
 				if(t->remove(&bstr[0]))
 					printf("Remove Success\n");
