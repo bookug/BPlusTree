@@ -143,15 +143,27 @@ not use one more position, but consider in detail
 Work in 2015.3.22-3.25
 finish the range_query
 fix almostly all bugs
-what's approviate to initial the heap size?
+
+
 
 Project should be improved in 3.26-3.31
 The whole work is expected to be done before 4.1
+Test:
+use another class with several arguments, test all kinds of operations and compute
+the mean and variance according to given arguments.
+Arguments should be placed in array, and output-file should be named using them.
+We should finish the whole test in one loop!
 Later:
 sort and draw a better graph
 
-Question in 2015.3.24
+Still not good:
+what's approviate to initial the heap size?
+if childs without one more position, then may double-free, how to fix it?
 when a node's property is changed, how to find this node in heap? To better the searching,
 another heap, use hash(finding space will be problem, using list?)? STL map?
-in big-demo, insert-search-remove-release: sometimes causing double-free!(the question is
-		in remove-operation)
+
+
+
+
+
+

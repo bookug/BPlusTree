@@ -1,14 +1,16 @@
 CC = g++
 CFLAGS = -Wall -Werror -c -g
-PROGRAMS = small-demo produce big-demo clean  
-obj = Tree.o Storage.o Node.o IntlNode.o LeafNode.o Bstr.o Util.o Heap.o Hash.o RangeValue.o
+PROGRAMS = small-demo produce big-demo test-demo clean  
+obj = Tree.o Storage.o Node.o IntlNode.o LeafNode.o Bstr.o Util.o Heap.o Hash.o RangeValue.o Test.o
 all: $(PROGRAMS)
 small-demo: small-demo.cpp $(obj)
 	$(CC) -g small-demo.cpp $(obj) -o small-demo
-big-demo: big-demo.cpp $(obj)
-	$(CC) -g big-demo.cpp $(obj) -o big-demo
 produce: produce.cpp $(obj)
 	$(CC) -g produce.cpp $(obj) -o produce
+big-demo: big-demo.cpp $(obj)
+	$(CC) -g big-demo.cpp $(obj) -o big-demo
+test-demo: test-demo.cpp $(obj)
+	$(CC) -g test-demo.cpp $(obj) -o test-demo
 Tree.o: tree/Tree.cpp 
 	$(CC) $(CFLAGS) tree/Tree.cpp -o Tree.o
 Storage.o: storage/Storage.cpp
@@ -29,6 +31,8 @@ Heap.o: heap/Heap.cpp
 	$(CC) $(CFLAGS) heap/Heap.cpp -o Heap.o
 RangeValue.o: rangevalue/RangeValue.cpp
 	$(CC) $(CFLAGS) rangevalue/RangeValue.cpp -o RangeValue.o
+Test.o: test/Test.cpp
+	$(CC) $(CFLAGS) test/Test.cpp -o Test.o
 .PHONY: clean  
 clean:
 	rm -f $(obj)
@@ -37,12 +41,15 @@ tags:
 run1:
 	make
 	./small-demo
-run3: 
-	make
-	./big-demo
 run2:
 	make
 	./produce
+run3: 
+	make
+	./big-demo
+test:
+	make
+	./test-demo
 sumlines:
 	find . -name "*.[ch]*" | xargs wc -l
 tarball:
