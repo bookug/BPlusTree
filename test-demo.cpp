@@ -5,9 +5,16 @@
 #include "test/Test.h"
 using namespace std;
 
+#define NUM 1000000		//do NUM operations
+
 int
 main(int argc, char* argv[])
 {
-	//Test test("logs/key-value.dat", timelog);
+	Test* test = new Test("logs/key-value.dat", 126, 2, 10);
+	unsigned i = 0;
+	while(i < NUM)
+	{
+		test->operate();
+	}
 	return 0;
 }

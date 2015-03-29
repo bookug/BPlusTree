@@ -48,9 +48,9 @@ public:
 	//insert, search, remove, set
 	//bool search(unsigned _len1, const char* _str1, unsigned& _len2, const char*& _str2) const;
 	bool search(const Bstr* _key1, const Bstr*& _value);
-	bool insert(Bstr* _key, Bstr* _value);
+	bool insert(const Bstr* _key, const Bstr* _value);
 	//bool insert(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2);
-	bool modify(const Bstr* _key, Bstr* _value);
+	bool modify(const Bstr* _key, const Bstr* _value);
 	//bool modify(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2);
 	Node* find(const Bstr* _key, int* store, bool ifmodify) const;
 	//Node* find(unsigned _len, const char* _str, int* store) const;

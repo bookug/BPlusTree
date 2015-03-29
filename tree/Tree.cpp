@@ -110,7 +110,7 @@ Tree::search(const Bstr* _key, const Bstr*& _value)
 }
 
 bool
-Tree::insert(Bstr* _key, Bstr* _value)
+Tree::insert(const Bstr* _key, const Bstr* _value)
 {
 	request = 0;
 	Node* ret;
@@ -210,7 +210,7 @@ Tree::insert(Bstr* _key, Bstr* _value)
    */
 
 bool
-Tree::modify(const Bstr* _key, Bstr* _value)
+Tree::modify(const Bstr* _key, const Bstr* _value)
 {					
 	request = 0;
 	Bstr bstr = *_key;

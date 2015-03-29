@@ -3,15 +3,19 @@
 #include "Test.h"
 using namespace std;
 
+const char* Test::operations[Test::OPERATIONS] = { "BUILD", "OPEN", "SEARCH", "MODIFY", 
+	"INSERT", "REMOVE", "RANGE", "GET", "SAVE" };
+
 Test::Test()
 {
 	data_fp = NULL;
 	log_fp  = NULL;
+	ready = false;
 }
 
-Test::Test(string _data, unsigned _degree, unsigned _buffer, unsigned _size)
+Test::Test(const char* _data, unsigned _degree, unsigned _buffer, unsigned _size)
 {
-	if((data_fp = fopen(_data.c_str(), "r")) == NULL)
+	if((data_fp = fopen(_data, "rb")) == NULL)
 	{
 		printf("open error: data_fp\n");
 		exit(1);
@@ -23,56 +27,73 @@ Test::Test(string _data, unsigned _degree, unsigned _buffer, unsigned _size)
 		printf("open error: log_fp\n");
 		exit(1);
 	}
+	ready = true;
 }
 
-const Bstr*
+Bstr*
 Test::read()
 {
-	return NULL;//TODO
+	unsigned len;
+	fread(&len, sizeof(unsigned), 1, data_fp);
+	char* s = (char*)malloc(len);
+	fread(s, sizeof(char), len, data_fp);
+	return new Bstr(s, len);
 }
 
 void	//select a operation and print information: success? time?
 Test::operate()	
 {
-	const Bstr* bp;
+	const Bstr *bp;
+	Bstr *p1, *p2;
 	srand((unsigned)time(NULL));
 	unsigned ccase = rand() % OPERATIONS;
 	clock_t begin, end;
+	p1 = this->read();
+	p2 = this->read();
 	begin = clock();
 	switch(ccase)
 	{
 	case 0:
 		t = new Tree("logs", "tree.dat", "build");
+		this->ready = false;
 		break;
 	case 1:
-		t = new Tree("logs", "tree.dat", "open");
+		if(this->ready)
+			t = new Tree("logs", "tree.dat", "open");
 		break;
 	case 2:
-		t->search(read(), bp);
+		t->search(p1, bp);
 		break;
 	case 3:
-		t->modify(read(), read());
+		t->modify(p1, p2);
+		this->ready = false;
 		break;
 	case 4:
-		t->insert(read(), read());
+		t->insert(p1, p2);
+		this->ready = false;
 		break;
 	case 5:
-		t->remove(read());
+		t->remove(p1);
+		this->ready = false;
 		break;
 	case 6:
-		t->range_query(read(), read());
+		t->range_query(p1, p2);
 		break;
 	case 7:
 		bp = t->getRangeValue();
 		break;
 	case 8:
 		t->save();
+		this->ready = true;
 		break;
 	default:
 		printf("Unknown Operation\n");
 		break;
 	}
 	end = clock();
+	p1->release();
+	p2->release();
 	double duration = (double)(end - begin) / CLOCKS_PER_SEC;	
+	fprintf(log_fp, "operation: %s\ttime: %f\n", operations[ccase], duration);
 }
 
