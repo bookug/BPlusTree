@@ -47,7 +47,7 @@ run2:
 run3: 
 	make
 	./big-demo
-test:
+runtest:
 	make
 	./test-demo
 sumlines:

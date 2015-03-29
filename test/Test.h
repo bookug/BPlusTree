@@ -9,13 +9,18 @@
 class Test
 {
 private:
-	static const unsigned SEARCH = 0;
-	static const unsigned INSERT = 1;
-	static const unsigned REMOVE = 2;
-	static const unsigned RANGE  = 3;
+	const char* operations[] = { "BUILD", "OPEN", "SEARCH", "MODIFY", "INSERT",
+		"REMOVE", "RANGE", "GET", "SAVE" };
+	static const unsigned OPERATIONS = 9;	//total operations num
+	FILE* data_fp;
+	FILE* log_fp;
 public:
-	unsigned buffer;		//maybe long long, vary according to data-size
-	unsigned degree;
+	//unsigned buffer;		//maybe long long, vary according to data-size
+	//unsigned degree;
+	Test();
+	Test(unsigned degree, unsigned buffer, unsigned size);
+	void operate();
+	const Bstr* read();
 };
 
 #endif

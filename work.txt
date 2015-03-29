@@ -163,7 +163,8 @@ when a node's property is changed, how to find this node in heap? To better the 
 another heap, use hash(finding space will be problem, using list?)? STL map?
 
 
-
+small test should be in local, while big test must be done in 74-server. What's more, 
+	  77-server is for emergency, and you can use `make send` to upload files.
 
 
 
