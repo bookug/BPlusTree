@@ -16,7 +16,8 @@ Test::Test()
 {
 	data_fp = NULL;
 	log_fp  = NULL;
-	ready = false;
+	readyToOpen = false;
+	t = NULL;
 }
 
 Test::Test(const char* _data, unsigned _degree, unsigned _buffer, unsigned _size)
@@ -33,7 +34,8 @@ Test::Test(const char* _data, unsigned _degree, unsigned _buffer, unsigned _size
 		printf("open error: log_fp\n");
 		exit(1);
 	}
-	ready = true;
+	t = NULL;
+	readyToOpen = true;
 }
 
 Bstr*
@@ -52,7 +54,11 @@ Test::operate()
 	const Bstr *bp;
 	Bstr *p1, *p2;
 	srand((unsigned)time(NULL));
-	unsigned ccase = rand() % OPERATIONS;
+	unsigned ccase;
+	if(t != NULL)
+		ccase = rand() % OPERATIONS;
+	else
+		ccase = rand() % 2;
 	clock_t begin, end;
 	p1 = this->read();
 	p2 = this->read();
@@ -61,10 +67,10 @@ Test::operate()
 	{
 	case 0:
 		t = new Tree("logs", "tree.dat", "build");
-		this->ready = false;
+		this->readyToOpen = true;		//NOTICE: root-num is set to 0
 		break;
 	case 1:
-		if(this->ready)
+		if(this->readyToOpen)
 			t = new Tree("logs", "tree.dat", "open");
 		break;
 	case 2:
@@ -72,15 +78,15 @@ Test::operate()
 		break;
 	case 3:
 		t->modify(p1, p2);
-		this->ready = false;
+		this->readyToOpen = false;
 		break;
 	case 4:
 		t->insert(p1, p2);
-		this->ready = false;
+		this->readyToOpen = false;
 		break;
 	case 5:
 		t->remove(p1);
-		this->ready = false;
+		this->readyToOpen = false;
 		break;
 	case 6:
 		t->range_query(p1, p2);
@@ -90,7 +96,7 @@ Test::operate()
 		break;
 	case 8:
 		t->save();
-		this->ready = true;
+		this->readyToOpen = true;
 		break;
 	default:
 		printf("Unknown Operation\n");
