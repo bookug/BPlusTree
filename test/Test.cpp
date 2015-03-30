@@ -6,6 +6,12 @@ using namespace std;
 const char* Test::operations[Test::OPERATIONS] = { "BUILD", "OPEN", "SEARCH", "MODIFY", 
 	"INSERT", "REMOVE", "RANGE", "GET", "SAVE" };
 
+unsigned Test::count[Test::OPERATIONS] = {0};
+
+double Test::mean[Test::OPERATIONS] = {0};
+
+double Test::variance[Test::OPERATIONS] = {0};
+
 Test::Test()
 {
 	data_fp = NULL;
@@ -91,9 +97,23 @@ Test::operate()
 		break;
 	}
 	end = clock();
+	this->count[ccase]++;				//compute the specific operation num
 	p1->release();
 	p2->release();
 	double duration = (double)(end - begin) / CLOCKS_PER_SEC;	
-	fprintf(log_fp, "operation: %s\ttime: %f\n", operations[ccase], duration);
+	this->mean[ccase] += duration;		//compute the total time first
+	this->variance[ccase] += (duration * duration);	//compute sum of x^2 first
+	fprintf(log_fp, "operation: %s\ttime: %fs\n", operations[ccase], duration);
+}
+
+Test::~Test()
+{
+	unsigned i;
+	for(i = 0; i < this->OPERATIONS; ++i)
+	{
+		this->mean[i] /= this->count[i];
+		this->variance[i] = (this->variance[i] / this->count[i])	//E(x^2)
+			- (this->mean[i] * this->mean[i]);						//E2(x)
+	}
 }
 
