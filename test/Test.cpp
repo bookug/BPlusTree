@@ -115,11 +115,14 @@ Test::operate()
 Test::~Test()
 {
 	unsigned i;
+	fprintf(log_fp, "\n\n\n\noperation       mean            variance\n");	//set align
 	for(i = 0; i < this->OPERATIONS; ++i)
 	{
 		this->mean[i] /= this->count[i];
 		this->variance[i] = (this->variance[i] / this->count[i])	//E(x^2)
 			- (this->mean[i] * this->mean[i]);						//E2(x)
+		fprintf(log_fp, "%8s        %8.3f        %8.3f\n", 
+				this->operations[i], this->mean[i], this->variance[i]);
 	}
 }
 

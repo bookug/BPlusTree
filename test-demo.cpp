@@ -5,7 +5,7 @@
 #include "test/Test.h"
 using namespace std;
 
-#define NUM 1000000		//do NUM operations
+#define NUM 1000000		//do NUM operations, not exceed data file
 
 int
 main(int argc, char* argv[])
