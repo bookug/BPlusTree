@@ -26,7 +26,7 @@ Test::Test(const char* _data, unsigned _degree, unsigned _buffer, unsigned _size
 		printf("open error: data_fp\n");
 		exit(1);
 	}
-	string timelog = "degree_" + Util::int2string(_degree) + "+buffer_" + Util::int2string(_buffer)
+	string timelog = "logs/degree_" + Util::int2string(_degree) + "+buffer_" + Util::int2string(_buffer)
 		+ "G+size_" + Util::int2string(_size) + "G.log";
 	if((log_fp = fopen(timelog.c_str(), "w+")) == NULL)
 	{
