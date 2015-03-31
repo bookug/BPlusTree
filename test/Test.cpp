@@ -128,6 +128,8 @@ Test::~Test()
 		fprintf(log_fp, "%-8s        %-8u        %-12.8f        %-12.12f\n", 
 				this->operations[i], this->count[i], this->mean[i], this->variance[i]);
 	}
+	fclose(data_fp);
+	fclose(log_fp);
 	delete t;
 }
 
