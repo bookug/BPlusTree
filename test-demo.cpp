@@ -5,7 +5,7 @@
 #include "test/Test.h"
 using namespace std;
 
-#define NUM 10000		//do NUM operations, not exceed data file
+#define NUM 100000		//do NUM operations, not exceed data file
 
 int
 main(int argc, char* argv[])
@@ -14,7 +14,9 @@ main(int argc, char* argv[])
 	unsigned i = 0;
 	while(i < NUM)
 	{
+		i++;
 		test->operate();
 	}
+	delete test;
 	return 0;
 }

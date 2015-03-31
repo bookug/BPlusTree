@@ -36,6 +36,7 @@ Test::Test(const char* _data, unsigned _degree, unsigned _buffer, unsigned _size
 	}
 	t = NULL;
 	readyToOpen = true;
+	srand((unsigned)time(NULL));
 }
 
 Bstr*
@@ -53,7 +54,6 @@ Test::operate()
 {
 	const Bstr *bp;
 	Bstr *p1, *p2;
-	srand((unsigned)time(NULL));
 	unsigned ccase;
 	if(t != NULL)
 		ccase = rand() % OPERATIONS;
@@ -109,20 +109,23 @@ Test::operate()
 	double duration = (double)(end - begin) / CLOCKS_PER_SEC;	
 	this->mean[ccase] += duration;		//compute the total time first
 	this->variance[ccase] += (duration * duration);	//compute sum of x^2 first
-	fprintf(log_fp, "operation: %s\ttime: %fs\n", operations[ccase], duration);
+	fprintf(log_fp, "operation: %8s        time: %fs\n", operations[ccase], duration);
 }
 
 Test::~Test()
 {
 	unsigned i;
-	fprintf(log_fp, "\n\n\n\noperation       mean            variance\n");	//set align
+	fprintf(log_fp, "\n\n\n\noperation       count           mean                variance\n");	//set align
 	for(i = 0; i < this->OPERATIONS; ++i)
 	{
-		this->mean[i] /= this->count[i];
-		this->variance[i] = (this->variance[i] / this->count[i])	//E(x^2)
-			- (this->mean[i] * this->mean[i]);						//E2(x)
-		fprintf(log_fp, "%8s        %8.3f        %8.3f\n", 
-				this->operations[i], this->mean[i], this->variance[i]);
+		if(count[i] > 0)
+		{
+			this->mean[i] /= this->count[i];
+			this->variance[i] = (this->variance[i] / this->count[i])	//E(x^2)
+				- (this->mean[i] * this->mean[i]);						//E2(x)
+		}
+		fprintf(log_fp, "%-8s        %-8u        %-12.8f        %-12.12f\n", 
+				this->operations[i], this->count[i], this->mean[i], this->variance[i]);
 	}
 }
 
