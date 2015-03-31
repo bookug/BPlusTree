@@ -14,6 +14,7 @@ main(int argc, char* argv[])
 	unsigned i = 0;
 	while(i < NUM)
 	{
+		printf("\n\nthis is the %u-th loop\n", i);
 		i++;
 		test->operate();
 	}

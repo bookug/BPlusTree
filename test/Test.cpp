@@ -109,6 +109,7 @@ Test::operate()
 	double duration = (double)(end - begin) / CLOCKS_PER_SEC;	
 	this->mean[ccase] += duration;		//compute the total time first
 	this->variance[ccase] += (duration * duration);	//compute sum of x^2 first
+	printf("operation: %8s        time: %fs\n", operations[ccase], duration);
 	fprintf(log_fp, "operation: %8s        time: %fs\n", operations[ccase], duration);
 }
 
