@@ -56,7 +56,7 @@ Test::operate()
 	Bstr *p1, *p2;
 	unsigned ccase;
 	if(t != NULL)
-		ccase = rand() % OPERATIONS;
+		ccase = rand() % OPERATIONS + 2;
 	else
 		ccase = rand() % 2;
 	clock_t begin, end;
@@ -128,5 +128,6 @@ Test::~Test()
 		fprintf(log_fp, "%-8s        %-8u        %-12.8f        %-12.12f\n", 
 				this->operations[i], this->count[i], this->mean[i], this->variance[i]);
 	}
+	delete t;
 }
 
