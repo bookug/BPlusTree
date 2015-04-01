@@ -3,8 +3,8 @@
 #include "Test.h"
 using namespace std;
 
-const char* Test::operations[Test::OPERATIONS] = { "BUILD", "OPEN", "SEARCH", "MODIFY", 
-	"INSERT", "REMOVE", "RANGE", "GET", "SAVE" };
+const char* Test::operations[Test::OPERATIONS] = { "BUILD", "OPEN", "SAVE", "SEARCH", "MODIFY", 
+	"INSERT", "REMOVE", "RANGE", "GET" };
 
 unsigned Test::count[Test::OPERATIONS] = {0};
 
