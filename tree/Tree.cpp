@@ -368,9 +368,11 @@ Tree::getRangeValue()
 
 bool	//special case: not exist, one-edge-case
 Tree::range_query(const Bstr* _key1, const Bstr* _key2)
-{		//the range is: *_key1 <= x < *_key2 	
+{		//the range is: *_key1 <= x < *_key2
+	/*
 	if(_key1 == NULL && _key2 == NULL)
 		return false;
+		*/
 	//ok to search one-edge, requiring only one be NULL
 	this->VALUES.open();
 	/* find and write value */
@@ -408,7 +410,7 @@ Tree::range_query(const Bstr* _key1, const Bstr* _key2)
 	}
 	else
 	{
-		p2 = this->leaves_head;
+		p2 = this->leaves_tail;
 		store2 = p2->getNum();
 	}
 
