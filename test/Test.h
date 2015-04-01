@@ -19,6 +19,7 @@ private:
 	FILE* log_fp;
 	Tree* t;
 	bool readyToOpen;				//if ready to open tree
+	bool neglect;					//neglect the stable-time operations
 public:
 	//unsigned buffer;		//maybe long long, vary according to data-size
 	//unsigned degree;

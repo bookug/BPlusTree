@@ -17,6 +17,7 @@ Test::Test()
 	data_fp = NULL;
 	log_fp  = NULL;
 	readyToOpen = false;
+	neglect = false;
 	t = NULL;
 }
 
@@ -36,6 +37,7 @@ Test::Test(const char* _data, unsigned _degree, unsigned _buffer, unsigned _size
 	}
 	t = NULL;
 	readyToOpen = true;
+	neglect = true;
 	srand((unsigned)time(NULL));
 }
 
@@ -56,9 +58,13 @@ Test::operate()
 	Bstr *p1, *p2;
 	unsigned ccase;
 	if(t != NULL)
-		ccase = rand() % OPERATIONS + 2;
+	{
+		ccase = rand() % OPERATIONS;
+		if(neglect && ccase < 3)
+			return;
+	}
 	else
-		ccase = rand() % 2;
+		ccase = 1;	//rand() % 2;
 	clock_t begin, end;
 	p1 = this->read();
 	p2 = this->read();
@@ -74,29 +80,29 @@ Test::operate()
 			t = new Tree("logs", "tree.dat", "open");
 		break;
 	case 2:
-		t->search(p1, bp);
+		t->save();
+		this->readyToOpen = true;
 		break;
 	case 3:
+		t->search(p1, bp);
+		break;
+	case 4:
 		t->modify(p1, p2);
 		this->readyToOpen = false;
 		break;
-	case 4:
+	case 5:
 		t->insert(p1, p2);
 		this->readyToOpen = false;
 		break;
-	case 5:
+	case 6:
 		t->remove(p1);
 		this->readyToOpen = false;
 		break;
-	case 6:
+	case 7:
 		t->range_query(p1, p2);
 		break;
-	case 7:
-		bp = t->getRangeValue();
-		break;
 	case 8:
-		t->save();
-		this->readyToOpen = true;
+		bp = t->getRangeValue();
 		break;
 	default:
 		printf("Unknown Operation\n");
@@ -128,6 +134,8 @@ Test::~Test()
 		fprintf(log_fp, "%-8s        %-8u        %-12.8f        %-12.12f\n", 
 				this->operations[i], this->count[i], this->mean[i], this->variance[i]);
 	}
+	fclose(data_fp);
+	fclose(log_fp);
 	delete t;
 }
 
