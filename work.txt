@@ -166,5 +166,12 @@ another heap, use hash(finding space will be problem, using list?)? STL map?
 small test should be in local, while big test must be done in 74-server. What's more, 
 	  77-server is for emergency, and you can use `make send` to upload files.
 
+Move to Gstore in 4.24
+use multiple Makefile to organize
+problem: release, close
+the demand on range-query: utilize?
+tail-recursive/calling may be useful when there are many function-calling!
+(better not to use recursive)
+
 
 
