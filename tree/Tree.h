@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Tree.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:44
+# Description: struct and interface of the B+ tree
+=============================================================================*/
 
 #ifndef _TREE_H
 #define _TREE_H
@@ -67,3 +73,4 @@ public:
 //After saved, it's ok to continue operations on tree!
 
 #endif
+

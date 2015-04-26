@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Node.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:38
+# Description: basic Node class, father of IntlNode and LeafNode
+=============================================================================*/
 
 #ifndef _NODE_H
 #define _NODE_H

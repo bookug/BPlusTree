@@ -1,5 +1,10 @@
-/* Information about this file */
-//disk-file memlayout
+/*=============================================================================
+# Filename: file.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:42
+# Description: disk file memlayout
+=============================================================================*/
 
 #ifndef _FILE_H
 #define _FILE_H

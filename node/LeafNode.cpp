@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: LeafNode.cpp
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:40
+# Description: ahieve functions in LeafNode.h
+=============================================================================*/
 
 #include "LeafNode.h"
 using namespace std;

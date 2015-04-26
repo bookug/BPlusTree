@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Bstr.cpp
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:35
+# Description: achieve functions in Bstr.h
+=============================================================================*/
 
 #include "Bstr.h"
 using namespace std;

@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Bstr.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:33
+# Description: class declaration for Bstr(used to store arbitary string) 
+=============================================================================*/
 
 #ifndef _BSTR_H
 #define _BSTR_H
@@ -32,3 +38,4 @@ public:
 };
 
 #endif
+

@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Hash.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:36
+# Description: to utilize the search for Node*	NOT USED YET
+=============================================================================*/
 
 #ifndef _HASH_H
 #define _HASH_H
@@ -19,3 +25,4 @@ public:
 };
 
 #endif
+

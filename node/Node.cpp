@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Node.cpp
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:39
+# Description: achieve functions in Node.h
+=============================================================================*/
 
 #include "Node.h"
 using namespace std;

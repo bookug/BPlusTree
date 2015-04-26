@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Heap.cpp
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:37
+# Description: achieve functions in Heap.h
+=============================================================================*/
 
 #include "Heap.h"
 using namespace std;

@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Util.cpp
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:46
+# Description: achieve functions in Util.h
+=============================================================================*/
 
 #include "Util.h"
 using namespace std;

@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Test.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:44
+# Description: used for regular tests
+=============================================================================*/
 
 #ifndef _TEST_H
 #define _TEST_H

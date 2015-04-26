@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: IntlNode.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:40
+# Description: the internal-node of a B+ tree
+=============================================================================*/
 
 #ifndef _INTL_NODE_H
 #define _INTL_NODE_H

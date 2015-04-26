@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: IntlNode.cpp
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:40
+# Description: achieve functions in IntlNode.h
+=============================================================================*/
 
 #include "IntlNode.h"
 using namespace std;

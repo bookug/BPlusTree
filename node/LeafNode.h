@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: LeafNode.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:39
+# Description: the leaf-node of a B+ tree
+=============================================================================*/
 
 #ifndef _LEAF_NODE_H
 #define _LEAF_NODE_H

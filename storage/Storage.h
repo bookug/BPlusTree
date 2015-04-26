@@ -1,5 +1,10 @@
-/* information about this file */
-//to swap between memory and disk, achieving system-like method
+/*=============================================================================
+# Filename: Storage.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:43
+# Description: swap between memory and disk, achieving system-like method
+=============================================================================*/
 
 #ifndef _STORAGE_H
 #define _STORAGE_H

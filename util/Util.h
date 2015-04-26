@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Util.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:45
+# Description: common macros, functions, classes, etc.
+=============================================================================*/
 
 #ifndef _UTIL_H
 #define _UTIL_H

@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Storage.cpp
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:43
+# Description: achieve functions in Storage.h
+=============================================================================*/
 
 #include "Storage.h"
 using namespace std;

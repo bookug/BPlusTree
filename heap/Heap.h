@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Heap.h
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:37
+# Description: set and deal of Node*s in memory
+=============================================================================*/
 
 #ifndef _HEAP_H
 #define _HEAP_H

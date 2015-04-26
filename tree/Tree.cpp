@@ -1,4 +1,10 @@
-/* Information about this file */
+/*=============================================================================
+# Filename: Tree.cpp
+# Author: syzz
+# Mail: 1181955272@qq.com
+# Last Modified: 2015-04-26 16:45
+# Description: achieve functions in Tree.h
+=============================================================================*/
 
 #include "Tree.h"
 using namespace std;
