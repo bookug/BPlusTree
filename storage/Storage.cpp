@@ -261,9 +261,9 @@ Storage::readNode(Node* _np, int* _request)
 	//fread(treefp, "%u", &num);
 	//_np->setNum(num);
 	if(flag)
-		*_request += LEAF_SIZE;
+		*_request += Node::LEAF_SIZE;
 	else
-		*_request += INTL_SIZE;
+		*_request += Node::INTL_SIZE;
 		_np->Normal();
 	if(!flag)
 		fseek(treefp, 4 * (num + 1), SEEK_CUR);

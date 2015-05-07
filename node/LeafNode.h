@@ -13,8 +13,6 @@
 #include "../bstr/Bstr.h"
 #include "Node.h"
 
-#define LEAF_SIZE	2*sizeof(Bstr)*Node::MAX_KEY_NUM
-
 class LeafNode: public Node    
 {
 protected:
@@ -52,3 +50,4 @@ public:
 //BETTER: prev isn't a must, and reverse-range can be achieved using recursive-next
 
 #endif
+

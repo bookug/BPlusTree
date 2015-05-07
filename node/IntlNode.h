@@ -12,12 +12,12 @@
 #include "../util/Util.h"
 #include "Node.h"
 
-#define INTL_SIZE	sizeof(Bstr)*Node::MAX_KEY_NUM
-
 class IntlNode: public Node
 {
-private:
-	Node* childs[MAX_CHILD_NUM+1];	//BETTER: here waste 8-bytes to avoid bugs!
+protected:
+	//Node* childs[MAX_CHILD_NUM+1];
+	Node** childs;
+	void AllocChilds();
 public:
 	IntlNode();
 	IntlNode(bool isVirtual);
@@ -47,3 +47,4 @@ public:
 };
 
 #endif
+

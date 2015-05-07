@@ -173,5 +173,6 @@ the demand on range-query: utilize?
 tail-recursive/calling may be useful when there are many function-calling!
 (better not to use recursive)
 
-
+align-way in 64-bit machine
+write bytes in 4-align(no question)
 

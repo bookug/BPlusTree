@@ -16,7 +16,7 @@
 /* add, sub, modify: all can be done within O(logn) using adjust-function */
 //QUERY: when modified, finding right position consumes O(n). How about keeping smallest?
 //(add O(1), sub O(2n), modify O(n)
-//To solve this probem, use another hash: (pointer, pos), to find the right position of
+//TODO: to solve this probem, use another hash: (pointer, pos), to find the right position of
 //given p in O(lgn) time
 
 class Heap
@@ -41,3 +41,4 @@ public:
 };
 
 #endif
+

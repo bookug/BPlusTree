@@ -123,7 +123,7 @@ Tree::insert(const Bstr* _key, const Bstr* _value)
 	if(this->root == NULL)	//tree is empty
 	{
 		leaves_tail = leaves_head = root = new LeafNode;
-		request += LEAF_SIZE;
+		request += Node::LEAF_SIZE;
 		this->height = 1;
 		root->setHeight(1);	//add to heap later
 	}
@@ -131,15 +131,15 @@ Tree::insert(const Bstr* _key, const Bstr* _value)
 	if(root->getNum() == Node::MAX_KEY_NUM)
 	{
 		Node* father = new IntlNode;
-		request += INTL_SIZE;
+		request += Node::INTL_SIZE;
 		father->addChild(root, 0);
 		ret = root->split(father, 0);
 		if(ret->isLeaf() && ret->getNext() == NULL)
 			this->leaves_tail = ret;
 		if(ret->isLeaf())
-			request += LEAF_SIZE;
+			request += Node::LEAF_SIZE;
 		else
-			request += INTL_SIZE;
+			request += Node::INTL_SIZE;
 		this->height++;		//height rises only when root splits
 		//WARN: height area in Node: 4 bit!
 		father->setHeight(this->height);	//add to heap later
@@ -164,9 +164,9 @@ Tree::insert(const Bstr* _key, const Bstr* _value)
 			if(ret->isLeaf() && ret->getNext() == NULL)
 				this->leaves_tail = ret;
 			if(ret->isLeaf())
-				request += LEAF_SIZE;
+				request += Node::LEAF_SIZE;
 			else
-				request += INTL_SIZE;
+				request += Node::INTL_SIZE;
 			//BETTER: in loop may update multiple times
 			this->TSM->updateHeap(ret, ret->getRank(), false);
 			this->TSM->updateHeap(q, q->getRank(), true);

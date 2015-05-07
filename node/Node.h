@@ -12,15 +12,10 @@
 #include "../util/Util.h"
 #include "../bstr/Bstr.h"
 
-/* Node's RANK area
- * visit should be in lowest bits, and each time when visiting, applying
- * old-algorithm to all nodes in Heap
- */
-
 class Node       				//abstract basic class 
 {
 public:
-	static const unsigned DEGREE = 2 * 63;	//the degree of B+ tree, restricted in enev.(100 is another type of degree)
+	static const unsigned DEGREE = 2 * 63;	//the degree of B+ tree
 	static const unsigned MAX_CHILD_NUM = DEGREE;		
 	static const unsigned MIN_CHILD_NUM = DEGREE >> 1;
 	static const unsigned MAX_KEY_NUM = MAX_CHILD_NUM - 1;	//max key-num
@@ -33,6 +28,8 @@ public:
 	static const unsigned NF_RK = 0x00ffffff;	//select-rank, in Storage
 	static const unsigned NF_HT = 0xf00000;		//height area in rank
 	static const unsigned NF_KN = 0x07f000;		//NOTICE: decided by DEGREE
+	static const unsigned INTL_SIZE = sizeof(Bstr) * MAX_KEY_NUM;
+	static const unsigned LEAF_SIZE = 2 * INTL_SIZE;
 protected:
 	unsigned store;			//store address, the BLock index
 	unsigned flag;			//NF_RK, NF_IL,NF_ID, NF_IV, propety
@@ -44,8 +41,6 @@ protected:
 public:
 	Node();		
 	Node(bool isVirtual);
-	//Node(Storage* TSM);		
-	/* TODO(add functions) */
 	bool isLeaf() const;
 	bool isDirty() const;
 	void setDirty();
@@ -110,3 +105,4 @@ public:
  */
 
 #endif
+
