@@ -15,9 +15,9 @@
 class IntlNode: public Node
 {
 protected:
-	//Node* childs[MAX_CHILD_NUM+1];
-	Node** childs;
-	void AllocChilds();
+	Node* childs[MAX_CHILD_NUM+1];
+	//Node** childs;
+	//void AllocChilds();
 public:
 	IntlNode();
 	IntlNode(bool isVirtual);

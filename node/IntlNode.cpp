@@ -9,22 +9,24 @@
 #include "IntlNode.h"
 using namespace std;
 
+/*
 void
 IntlNode::AllocChilds()
 {
 	childs = (Node**)malloc(sizeof(Node*) * MAX_CHILD_NUM);
 }
+*/
 
 IntlNode::IntlNode()
 {
 	memset(childs, sizeof(Node*) * MAX_CHILD_NUM, 0);	
-	this->AllocChilds();
+	//this->AllocChilds();
 }
 
 IntlNode::IntlNode(bool isVirtual)	//call father-class's constructor automaticlly
 {
 	memset(childs, sizeof(Node*) * MAX_CHILD_NUM, 0);
-	this->AllocChilds();
+	//this->AllocChilds();
 }
 
 /*
@@ -255,7 +257,7 @@ IntlNode::release()
 IntlNode::~IntlNode()
 {
 	release();
-	free(childs);
+	//free(childs);
 }
 
 void
