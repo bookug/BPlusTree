@@ -135,7 +135,7 @@ TBstr::~TBstr()
 void
 TBstr::print(string s) const
 {
-	/*
+#ifdef DEBUG
 	Util::showtime();
 	fputs("Class TBstr\n", Util::logsfp);
 	fputs("Message: ", Util::logsfp);
@@ -154,6 +154,6 @@ TBstr::print(string s) const
 		fprintf(Util::logsfp, "length: %u\n", this->length);
 	}
 	else;
-	*/
+#endif
 }
 

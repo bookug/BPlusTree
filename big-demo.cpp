@@ -10,10 +10,13 @@
 using namespace std;
 
 #define BUILD 0
-#define NUM 100000
+#define NUM 10000
 
 int main(int argc, char** argv)
 {
+#ifdef DEBUG
+	printf("debug mode on\n");
+#endif
 	Tree* t;		//NOTICE:problem if using value!
 	if(BUILD)
 		t = new Tree("logs", "tree.dat", "build");

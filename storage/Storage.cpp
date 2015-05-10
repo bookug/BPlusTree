@@ -11,13 +11,13 @@ using namespace std;
 
 Storage::Storage()
 {							//not use ../logs/, notice the location of program
-	/*
+#ifdef DEBUG
 	if((Util::logsfp = fopen("logs/default.log", "w+")) == NULL) 
 	{
 		printf("Open error: logs/default.log\n");
 		Util::logsfp = stdout;
 	}
-	*/
+#endif
 	cur_block_num = SET_BLOCK_NUM;
 	filepath = "";
 	freelist = NULL;
@@ -28,13 +28,13 @@ Storage::Storage()
 
 Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 {
-	/*
+#ifdef DEBUG
 	if((Util::logsfp = fopen("logs/default.log", "w+")) == NULL)
 	{
 		printf("Open error: logs/default.log\n");
 		Util::logsfp = stdout;
 	}
-	*/
+#endif
 	cur_block_num = SET_BLOCK_NUM;		//initialize
 	this->filepath = _filepath;
 	if(_mode == string("build"))
@@ -54,7 +54,7 @@ Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 	this->treeheight = _height;		//originally set to 0
 	this->freemem = MAX_BUFFER_SIZE;
 	this->freelist = new BlockInfo;	//null-head
-	unsigned i, k;	//j = (SuperNum-1)*BLOCK_SIZE
+	unsigned i, j, k;	//j = (SuperNum-1)*BLOCK_SIZE
 	BlockInfo* bp;
 	if(_mode == "build")
 	{	//write basic information
@@ -64,7 +64,8 @@ Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 		fwrite(&cur_block_num, sizeof(unsigned), 1, this->treefp);	//current block num
 		fseek(this->treefp, BLOCK_SIZE, SEEK_SET);
 		bp = this->freelist;
-		for(i = 0; i < cur_block_num; ++i)
+		j = cur_block_num / 8;
+		for(i = 0; i < j; ++i)
 		{
 				fputc(0, this->treefp);
 				for(k = 0; k < 8; ++k)
@@ -84,7 +85,8 @@ Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 		fread(&cur_block_num, sizeof(unsigned), 1, this->treefp);
 		fseek(this->treefp, BLOCK_SIZE, SEEK_SET);
 		bp = this->freelist;
-		for(i = 0; i < cur_block_num; ++i)
+		j = cur_block_num / 8;
+		for(i = 0; i < j; ++i)
 		{
 			c = fgetc(treefp);
 			for(k = 0; k < 8; ++k)
@@ -214,8 +216,8 @@ Storage::AllocBlock()
 			cur_block_num++;	//BETTER: check if > MAX_BLOCK_NUM
 			this->FreeBlock(cur_block_num);
 		}
+		p = this->freelist->next;
 	}
-	p = this->freelist->next;
 	unsigned t = p->num;
 	this->freelist->next = p->next;
 	delete p;
@@ -514,9 +516,9 @@ Storage::writeTree(Node* _root)	//write the whole tree back and close treefp
 	fwrite(&t, sizeof(unsigned), 1, treefp);	//write the root num
 	fwrite(&cur_block_num, sizeof(unsigned), 1, treefp);//write current blocks num
 	fseek(treefp, BLOCK_SIZE, SEEK_SET);
-	//j = (SuperNum-1)*BLOCK_SIZE;
+	j = cur_block_num / 8;	//(SuperNum-1)*BLOCK_SIZE;
 	//reset to 1 first
-	for(i = 0; i < cur_block_num; ++i)
+	for(i = 0; i < j; ++i)
 	{
 		fputc(0xff, treefp);
 	}
@@ -525,6 +527,13 @@ Storage::writeTree(Node* _root)	//write the whole tree back and close treefp
 	while(bp != NULL)
 	{
 		//if not-use then set 0, aligned to byte!
+#ifdef DEBUG
+		if(bp->num > cur_block_num)
+		{
+			printf("blocks num exceed, cur_block_num: %u\n", cur_block_num);
+			exit(1);
+		}
+#endif
 		j = bp->num - 1;
 		i = j / 8;
 		j = 7 - j % 8;
@@ -603,18 +612,20 @@ Storage::~Storage()
 	}
 	delete this->minheap;
 	fclose(this->treefp);
-	//fclose(Util::logsfp);
+#ifdef DEBUG
+	fclose(Util::logsfp);
+#endif
 }
 
 void
 Storage::print(string s)
 {
-	/*
+#ifdef DEBUG
 	Util::showtime();
 	fputs("Class Storage\n", Util::logsfp);
 	fputs("Message: ", Util::logsfp);
 	fputs(s.c_str(), Util::logsfp);
 	fputs("\n", Util::logsfp);
-	*/
+#endif
 }
 

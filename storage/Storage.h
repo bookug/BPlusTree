@@ -25,8 +25,9 @@ public:
 	static const unsigned MAX_BUFFER_SIZE = 1 << 31;		//max buffer size 
 	static const unsigned HEAP_SIZE = MAX_BUFFER_SIZE/Node::INTL_SIZE;
 	static const unsigned MAX_BLOCK_NUM = 1 << 24;		//max block-num
+	//below two constants: must can be exactly divided by 8
 	static const unsigned SET_BLOCK_NUM = 1 << 8;		//initial blocks num
-	static const unsigned SET_BLOCK_INC = 1 << 8;		//base of blocks-num inc
+	static const unsigned SET_BLOCK_INC = SET_BLOCK_NUM;	//base of blocks-num inc
 	static const unsigned SuperNum = MAX_BLOCK_NUM/(8*BLOCK_SIZE)+1;
 	//static const unsigned TRANSFER_CAPACITY = BLOCK_SIZE;
 	//enum ReadType { OVER = 0, EXPAND, NORMAL };

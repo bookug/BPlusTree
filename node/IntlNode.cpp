@@ -264,7 +264,7 @@ IntlNode::~IntlNode()
 void
 IntlNode::print(string s)
 {
-	/*
+#ifdef DEBUG
 	int num = this->getNum();
 	Util::showtime();
 	fputs("Class IntlNode\n", Util::logsfp);
@@ -288,6 +288,6 @@ IntlNode::print(string s)
 		//TODO(check node, if satisfy B+ definition)
 	}
 	else;
-	*/
+#endif
 }
 

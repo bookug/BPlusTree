@@ -499,7 +499,7 @@ Tree::~Tree()
 void
 Tree::print(string s)
 {
-	/*
+#ifdef DEBUG
 	Util::showtime();
 	fputs("Class Tree\n", Util::logsfp);
 	fputs("Message: ", Util::logsfp);
@@ -563,6 +563,6 @@ Tree::print(string s)
 		//TODO	
 	}
 	else;
-	*/
+#endif
 }
 

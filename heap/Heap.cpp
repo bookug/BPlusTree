@@ -180,5 +180,7 @@ Heap::~Heap()
 void
 Heap::print(string s)
 {
+#ifdef DEBUG
+#endif
 }
 

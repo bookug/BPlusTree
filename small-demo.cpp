@@ -8,7 +8,7 @@
 #include "node/LeafNode.h"
 using namespace std;
 
-#define BUILD 1
+#define BUILD 0
 
 int 
 main(int argc, char** argv)
@@ -80,6 +80,7 @@ main(int argc, char** argv)
 	}
 	else
 	{
+		printf("tree is in open mode\n");
 		bp1->setLen(1);
 		bp2->setLen(1);
 		s = new char[1];

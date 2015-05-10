@@ -323,7 +323,7 @@ LeafNode::~LeafNode()
 void
 LeafNode::print(string s)
 {
-	/*
+#ifdef DEBUG
 	unsigned num = this->getNum();
 	Util::showtime();
 	fputs("Class LeafNode\n", Util::logsfp);
@@ -371,6 +371,6 @@ LeafNode::print(string s)
 			fprintf(Util::logsfp, "This node is bad\n");
 	}
 	else;
-	*/
+#endif
 }
 
