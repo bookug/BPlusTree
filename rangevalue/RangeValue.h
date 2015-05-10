@@ -11,20 +11,20 @@
 #endif
 
 #include "../util/Util.h"
-#include "../bstr/Bstr.h"
+#include "../bstr/TBstr.h"
 
 class RangeValue
 {
 private:
 	FILE* fp;
-	Bstr transfer;
+	TBstr transfer;
 	unsigned transfer_size;
 public:
 	RangeValue();
 	void reset();
 	bool open();
-	bool write(const Bstr* _bp);
-	const Bstr* read();
+	bool write(const TBstr* _bp);
+	const TBstr* read();
 	~RangeValue();
 };
 

@@ -16,7 +16,7 @@ main(int argc, char** argv)
 	//freopen("logs/default.log", "a", stdout);
 	//print basic information of tree
 	printf("This is a B+ tree!\n");
-	printf("size of Bstr: %lu\n", sizeof(Bstr));	
+	printf("size of TBstr: %lu\n", sizeof(TBstr));	
 	printf("size of Node: %lu\n", sizeof(Node));
 	printf("size of IntlNode: %lu\n", sizeof(IntlNode));
 	printf("size of LeafNode: %lu\n", sizeof(LeafNode));
@@ -32,11 +32,11 @@ main(int argc, char** argv)
 	else
 		t = new Tree("logs", "tree.dat", "open");
 
-	Bstr* bp1 = new Bstr(NULL, 0);
-	Bstr* bp2 = new Bstr(NULL, 0);
+	TBstr* bp1 = new TBstr(NULL, 0);
+	TBstr* bp2 = new TBstr(NULL, 0);
 	int i;
 	char* s;
-	const Bstr* bp3;
+	const TBstr* bp3;
 	if(BUILD)
 	{
 		for(i = 0; i < 10; ++i)

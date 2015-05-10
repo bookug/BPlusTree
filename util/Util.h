@@ -21,49 +21,6 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-//add more when needed
-
-/* some data types WARN(maybe have to change)*/
-typedef unsigned int Blockaddr_t;	
-typedef unsigned int Bstrlen_t;		
-typedef unsigned int Memorybuf_t;	
-typedef unsigned int Heaplen_t;
-
-#define MIN(_a, _b)							\
-({											\
-	typeof(_a) __a = (_a);					\
-	typeof(_b) __b = (_b);					\
-	__a <= __b ? __a : __b;					\
-})
-#define MAX(_a, _b)							\
-({											\
-	typeof(_a) __a = (_a);					\
-	typeof(_b) __b = (_b);					\
-	__a >= __b ? __a : __b;					\
-})
-
-/* this function swaps content all the time!
-#define SWAP(_a, _b)						\
-({											\
-	typeof(_a) t = _a;						\
-	_a = _b;								\
-	_b = t;									\
-})								
-*/
-
-#define ROUNDDOWN(a, n)						\
-({											\
-	unsigned __a = (unsigned) (a);			\
-	(typeof(a)) (__a - __a % (n));			\
-})
-#define ROUNDUP(a, n)						\
-({											\
-	unsigned __n = (unsigned) (n);			\
-	(typeof(a)) (ROUNDDOWN((unsigned) (a) + __n - 1, __n));	\
-})
-
-// Return the offset of 'member' relative to the beginning of a struct type
-//#define offsetof(type, member)  ((unsigned) (&((type*)0)->member))
 
 /******** all static&universal constants and fucntions ********/
 class Util	

@@ -12,7 +12,7 @@ using namespace std;
 void 
 Node::AllocKeys()
 {
-	keys = new Bstr[MAX_KEY_NUM];
+	keys = new TBstr[MAX_KEY_NUM];
 }
 
 /*
@@ -202,7 +202,7 @@ Node::setFlag(unsigned _flag)
 	this->flag = _flag;
 }
 
-const Bstr* 
+const TBstr* 
 Node::getKey(int _index) const
 {
 	int num = this->getNum();
@@ -217,7 +217,7 @@ Node::getKey(int _index) const
 }
 
 bool
-Node::setKey(const Bstr* _key, int _index, bool ifcopy)
+Node::setKey(const TBstr* _key, int _index, bool ifcopy)
 {
 	int num = this->getNum();
 	if(_index < 0 || _index >= num)
@@ -233,7 +233,7 @@ Node::setKey(const Bstr* _key, int _index, bool ifcopy)
 }
 
 bool
-Node::addKey(const Bstr* _key, int _index, bool ifcopy)
+Node::addKey(const TBstr* _key, int _index, bool ifcopy)
 {
 	int num = this->getNum();
 	if(_index < 0 || _index > num)

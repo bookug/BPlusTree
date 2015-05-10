@@ -1,33 +1,28 @@
 /*=============================================================================
-# Filename: Bstr.cpp
+# Filename: TBstr.cpp
 # Author: syzz
 # Mail: 1181955272@qq.com
 # Last Modified: 2015-04-26 16:35
-# Description: achieve functions in Bstr.h
+# Description: achieve functions in TBstr.h
 =============================================================================*/
 
-#include "Bstr.h"
+#include "TBstr.h"
 using namespace std;
 
-Bstr::Bstr()
+TBstr::TBstr()
 {
 	this->length = 0;
 	this->str = NULL;
 }
 
-Bstr::Bstr(char* _str, unsigned _len)
+TBstr::TBstr(char* _str, unsigned _len)
 {
 	this->length = _len;
 	this->str = _str;
 }
-/*
-   Bstr::Bstr(Storage* TSM)
-   {
-   TSM->readBstr(this);
-   }
-   */
+
 bool 
-Bstr::operator > (const Bstr& _bstr)
+TBstr::operator > (const TBstr& _bstr)
 {
 	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
 	if(res == 1)
@@ -37,7 +32,7 @@ Bstr::operator > (const Bstr& _bstr)
 }
 
 bool 
-Bstr::operator < (const Bstr& _bstr)
+TBstr::operator < (const TBstr& _bstr)
 {
 	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
 	if(res == -1)
@@ -47,7 +42,7 @@ Bstr::operator < (const Bstr& _bstr)
 }
 
 bool
-Bstr::operator == (const Bstr& _bstr)
+TBstr::operator == (const TBstr& _bstr)
 {
 	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
 	if(res == 0)
@@ -57,7 +52,7 @@ Bstr::operator == (const Bstr& _bstr)
 }
 
 bool
-Bstr::operator <= (const Bstr& _bstr)
+TBstr::operator <= (const TBstr& _bstr)
 {
 	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
 	if(res <= 0)
@@ -67,7 +62,7 @@ Bstr::operator <= (const Bstr& _bstr)
 }
 
 bool
-Bstr::operator >= (const Bstr& _bstr)
+TBstr::operator >= (const TBstr& _bstr)
 {
 	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
 	if(res >= 0)
@@ -77,7 +72,7 @@ Bstr::operator >= (const Bstr& _bstr)
 }
 
 bool
-Bstr::operator != (const Bstr& _bstr)
+TBstr::operator != (const TBstr& _bstr)
 {
 	int res = Util::compare(this->str, this->length, _bstr.str, _bstr.length);
 	if(res != 0)
@@ -87,31 +82,31 @@ Bstr::operator != (const Bstr& _bstr)
 }
 
 unsigned
-Bstr::getLen() const
+TBstr::getLen() const
 {
 	return length;
 }
 
 void
-Bstr::setLen(unsigned _len)
+TBstr::setLen(unsigned _len)
 {
 	this->length = _len;
 }
 
 char*
-Bstr::getStr() const
+TBstr::getStr() const
 {
 	return str;
 }
 
 void 
-Bstr::setStr(char* _str)
+TBstr::setStr(char* _str)
 {
 	this->str = _str;
 }
 
 void
-Bstr::copy(const Bstr* _bp)
+TBstr::copy(const TBstr* _bp)
 {
 	this->length = _bp->getLen();
 	this->str = (char*)malloc(this->length);
@@ -119,29 +114,30 @@ Bstr::copy(const Bstr* _bp)
 }
 
 void
-Bstr::clear()	
+TBstr::clear()	
 {
 	this->str = NULL;
 	this->length = 0;
 }
 
 void
-Bstr::release()
+TBstr::release()
 {
 	free(this->str);	//ok to be null, do nothing
 	clear();
 }
 
-Bstr::~Bstr()	
+TBstr::~TBstr()	
 {	//avoid mutiple delete
 	release();
 }
 
 void
-Bstr::print(string s) const
+TBstr::print(string s) const
 {
+	/*
 	Util::showtime();
-	fputs("Class Bstr\n", Util::logsfp);
+	fputs("Class TBstr\n", Util::logsfp);
 	fputs("Message: ", Util::logsfp);
 	fputs(s.c_str(), Util::logsfp);
 	fputs("\n", Util::logsfp);
@@ -158,5 +154,6 @@ Bstr::print(string s) const
 		fprintf(Util::logsfp, "length: %u\n", this->length);
 	}
 	else;
+	*/
 }
 

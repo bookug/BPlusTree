@@ -24,7 +24,6 @@ private:
 	Node* leaves_head;			//the head of LeafNode-list
 	Node* leaves_tail;			//the tail of LeafNode-list
 	std::string mode;           //BETTER(to use enum)
-	//QUERY(how to extend: new or end-pointer?)
 	Storage* TSM;           	//Tree-Storage-Manage
 	RangeValue VALUES;			//just for range query
 	//always alloc one more byte than length, then user can add a '\0'
@@ -35,13 +34,13 @@ private:
 	//so lock is a must. Add lock to transfer is better than to add 
 	//lock to every key/value. However, modify requires a lock for a
 	//key/value, and multiple search for different keys are ok!!!
-	Bstr transfer;				//to transfer value searched
-	unsigned transfer_size;
+	TBstr transfer[3];	//0:transfer value searched; 1:copy key-data from const char*; 2:copy val-data from const char*
+	unsigned transfer_size[3];
 	std::string storepath;
 	std::string filename;      	//ok for user to change
 	/* some private functions */
 	std::string getFilePath();	//in UNIX system
-	void CopyToTransfer(const Bstr* _bstr);
+	void CopyToTransfer(const char* _str, unsigned _len, unsigned _index);
 	void release(Node* _np) const;
 	void prepare(Node* _np) const;
 public:
@@ -52,18 +51,18 @@ public:
 	Node* getRoot() const;
 	//void setRoot(Node* _root);
 	//insert, search, remove, set
-	//bool search(unsigned _len1, const char* _str1, unsigned& _len2, const char*& _str2) const;
-	bool search(const Bstr* _key1, const Bstr*& _value);
-	bool insert(const Bstr* _key, const Bstr* _value);
-	//bool insert(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2);
-	bool modify(const Bstr* _key, const Bstr* _value);
-	//bool modify(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2);
-	Node* find(const Bstr* _key, int* store, bool ifmodify) const;
+	bool search(const char* _str1, unsigned _len1, char*& _str2, int& _len2);
+	bool search(const TBstr* _key1, const TBstr*& _value);
+	bool insert(const TBstr* _key, const TBstr* _value);
+	bool insert(const char* _str1, unsigned _len1, const char* _str2, unsigned _len2);
+	bool modify(const TBstr* _key, const TBstr* _value);
+	bool modify(const char* _str1, unsigned _len1, const char* _str2, unsigned _len2);
+	Node* find(const TBstr* _key, int* store, bool ifmodify) const;
 	//Node* find(unsigned _len, const char* _str, int* store) const;
-	bool remove(const Bstr* _key);
-	//bool remove(unsigned _len, const char* _str);
-	const Bstr* getRangeValue();
-	bool range_query(const Bstr* _key1, const Bstr* _key2);
+	bool remove(const TBstr* _key);
+	bool remove(const char* _str, unsigned _len);
+	const TBstr* getRangeValue();
+	bool range_query(const TBstr* _key1, const TBstr* _key2);
 	bool save(); 			
 	~Tree();
 	void print(std::string s);			//DEBUG(print the tree)

@@ -10,14 +10,16 @@
 using namespace std;
 
 Storage::Storage()
-{							//not use ../logs/
+{							//not use ../logs/, notice the location of program
+	/*
 	if((Util::logsfp = fopen("logs/default.log", "w+")) == NULL) 
 	{
 		printf("Open error: logs/default.log\n");
 		Util::logsfp = stdout;
 	}
+	*/
+	cur_block_num = SET_BLOCK_NUM;
 	filepath = "";
-	//transfer = NULL;
 	freelist = NULL;
 	treefp = NULL;
 	minheap = NULL;
@@ -26,12 +28,14 @@ Storage::Storage()
 
 Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 {
+	/*
 	if((Util::logsfp = fopen("logs/default.log", "w+")) == NULL)
 	{
 		printf("Open error: logs/default.log\n");
 		Util::logsfp = stdout;
 	}
-	//transfer = (Bstr*)malloc(TRANSFER_CAPACITY);	
+	*/
+	cur_block_num = SET_BLOCK_NUM;		//initialize
 	this->filepath = _filepath;
 	if(_mode == string("build"))
 		treefp = fopen(_filepath.c_str(), "w+b");
@@ -50,16 +54,17 @@ Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 	this->treeheight = _height;		//originally set to 0
 	this->freemem = MAX_BUFFER_SIZE;
 	this->freelist = new BlockInfo;	//null-head
-	int i, j = (SuperNum-1)*BLOCK_SIZE, k;
+	unsigned i, k;	//j = (SuperNum-1)*BLOCK_SIZE
 	BlockInfo* bp;
 	if(_mode == "build")
 	{	//write basic information
 		i = 0;
-		fwrite(&i, sizeof(unsigned), 1, treefp);	//height
+		fwrite(&i, sizeof(unsigned), 1, this->treefp);	//height
 		fwrite(&i, sizeof(unsigned), 1, this->treefp); //rootnum
+		fwrite(&cur_block_num, sizeof(unsigned), 1, this->treefp);	//current block num
 		fseek(this->treefp, BLOCK_SIZE, SEEK_SET);
 		bp = this->freelist;
-		for(i = 0; i < j; ++i)
+		for(i = 0; i < cur_block_num; ++i)
 		{
 				fputc(0, this->treefp);
 				for(k = 0; k < 8; ++k)
@@ -68,7 +73,6 @@ Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 					bp = bp->next;
 				}
 		}
-		//the treefp is now ahead of first-block
 	}
 	else	//_mode == "open"
 	{
@@ -77,9 +81,10 @@ Storage::Storage(string& _filepath, string& _mode, unsigned* _height)
 		char c;
 		fread(this->treeheight, sizeof(unsigned), 1, this->treefp);
 		fread(&rootnum, sizeof(unsigned), 1, this->treefp);
+		fread(&cur_block_num, sizeof(unsigned), 1, this->treefp);
 		fseek(this->treefp, BLOCK_SIZE, SEEK_SET);
 		bp = this->freelist;
-		for(i = 0; i < j; ++i)
+		for(i = 0; i < cur_block_num; ++i)
 		{
 			c = fgetc(treefp);
 			for(k = 0; k < 8; ++k)
@@ -183,7 +188,7 @@ Storage::Address(unsigned _blocknum) const  //BETTER: inline function
 {
 	if(_blocknum == 0)
 		return 0;
-	else if(_blocknum > MAX_BLOCK_NUM)
+	else if(_blocknum > cur_block_num)
 	{
 		//print(string("error in Address: Invalid blocknum ") + Util::int2string(_blocknum));
 		return -1;		//address should be non-negative
@@ -203,14 +208,21 @@ Storage::AllocBlock()
 {
 	BlockInfo* p = this->freelist->next;
 	if(p == NULL)	
-		return 0;
+	{
+		for(unsigned i = 0; i < SET_BLOCK_INC; ++i)
+		{
+			cur_block_num++;	//BETTER: check if > MAX_BLOCK_NUM
+			this->FreeBlock(cur_block_num);
+		}
+	}
+	p = this->freelist->next;
 	unsigned t = p->num;
 	this->freelist->next = p->next;
 	delete p;
 	return t;
 }
 
-void
+void		
 Storage::FreeBlock(unsigned _blocknum)
 {			//QUERY: head-sub and tail-add will be better?
 	BlockInfo* bp = new BlockInfo(_blocknum, this->freelist->next);
@@ -254,10 +266,10 @@ Storage::readNode(Node* _np, int* _request)
 	bool flag = _np->isLeaf();
 	unsigned next;
 	unsigned i, num = _np->getNum();
-	Bstr bstr;
+	TBstr bstr;
 	fseek(treefp, 4, SEEK_CUR);
 	fread(&next, sizeof(unsigned), 1, treefp);
-	//read data, use readBstr...
+	//read data, use readTBstr...
 	//fread(treefp, "%u", &num);
 	//_np->setNum(num);
 	if(flag)
@@ -269,14 +281,14 @@ Storage::readNode(Node* _np, int* _request)
 		fseek(treefp, 4 * (num + 1), SEEK_CUR);
 	for(i = 0; i < num; ++i)
 	{
-		this->readBstr(&bstr, &next);
+		this->readTBstr(&bstr, &next);
 		_np->setKey(&bstr, i);
 	}
 	if(flag)
 	{
 		for(i = 0; i < num; ++i)
 		{
-			this->readBstr(&bstr, &next);
+			this->readTBstr(&bstr, &next);
 			*_request += bstr.getLen();
 			_np->setValue(&bstr, i);
 		}
@@ -373,11 +385,11 @@ Storage::writeNode(Node* _np)
 		}
 	}
 	for(i = 0; i < num; ++i)
-		this->writeBstr(_np->getKey(i), &blocknum, SpecialBlock);
+		this->writeTBstr(_np->getKey(i), &blocknum, SpecialBlock);
 	if(flag)
 	{
 		for(i = 0; i < num; ++i)
-			this->writeBstr(_np->getValue(i), &blocknum, SpecialBlock);
+			this->writeTBstr(_np->getValue(i), &blocknum, SpecialBlock);
 	}
 	fseek(treefp, Address(blocknum), SEEK_SET);
 	if(SpecialBlock)
@@ -390,7 +402,7 @@ Storage::writeNode(Node* _np)
 }
 
 bool
-Storage::readBstr(Bstr* _bp, unsigned* _next)
+Storage::readTBstr(TBstr* _bp, unsigned* _next)
 {
 	//long address;
 	unsigned len, i, j;
@@ -419,7 +431,7 @@ Storage::readBstr(Bstr* _bp, unsigned* _next)
 }
 
 bool
-Storage::writeBstr(const Bstr* _bp, unsigned* _curnum, bool& _SpecialBlock)
+Storage::writeTBstr(const TBstr* _bp, unsigned* _curnum, bool& _SpecialBlock)
 {
 	unsigned i, j, len = _bp->getLen();
 	fwrite(&len, sizeof(unsigned), 1, treefp);
@@ -500,10 +512,11 @@ Storage::writeTree(Node* _root)	//write the whole tree back and close treefp
 		t = 0;
 	fseek(this->treefp, 4, SEEK_SET);
 	fwrite(&t, sizeof(unsigned), 1, treefp);	//write the root num
+	fwrite(&cur_block_num, sizeof(unsigned), 1, treefp);//write current blocks num
 	fseek(treefp, BLOCK_SIZE, SEEK_SET);
-	j = (SuperNum-1)*BLOCK_SIZE;
+	//j = (SuperNum-1)*BLOCK_SIZE;
 	//reset to 1 first
-	for(i = 0; i < j; ++i)
+	for(i = 0; i < cur_block_num; ++i)
 	{
 		fputc(0xff, treefp);
 	}
@@ -577,14 +590,6 @@ Storage::handler(unsigned _needmem)	//>0
 	return true;
 }
 
-/*
-Node*
-Storage::select() //num, leaf
-{
-	return NULL;
-}
-*/
-
 Storage::~Storage()
 {
 	//release heap and freelist...
@@ -598,19 +603,18 @@ Storage::~Storage()
 	}
 	delete this->minheap;
 	fclose(this->treefp);
-	fclose(Util::logsfp);
+	//fclose(Util::logsfp);
 }
 
 void
 Storage::print(string s)
 {
+	/*
 	Util::showtime();
 	fputs("Class Storage\n", Util::logsfp);
 	fputs("Message: ", Util::logsfp);
 	fputs(s.c_str(), Util::logsfp);
 	fputs("\n", Util::logsfp);
-	//TODO: more basic information
-	//TODO: deal with special string
+	*/
 }
-
 

@@ -19,8 +19,8 @@ int main(int argc, char** argv)
 		t = new Tree("logs", "tree.dat", "build");
 	else
 		t = new Tree("logs", "tree.dat", "open");
-	Bstr bstr[2];
-	const Bstr* bp;
+	TBstr bstr[2];
+	const TBstr* bp;
 	char* s;
 	unsigned i, j, k;
 	FILE* fp = fopen("logs/key-value.dat", "rb");

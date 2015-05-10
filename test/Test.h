@@ -32,7 +32,7 @@ public:
 	Test();
 	Test(const char* _data, unsigned _degree, unsigned _buffer, unsigned _size);
 	void operate();
-	Bstr* read();
+	TBstr* read();
 	~Test();
 };
 

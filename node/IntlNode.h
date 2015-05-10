@@ -37,9 +37,9 @@ public:
 	/*non-sense functions: polymorphic
 	Node* getPrev() const;
 	Node* getNext() const;
-	const Bstr* getValue(int _index) const;
-	bool setValue(const Bstr* _value, int _index);
-	bool addValue(const Bstr* _value, int _index);
+	const TBstr* getValue(int _index) const;
+	bool setValue(const TBstr* _value, int _index);
+	bool addValue(const TBstr* _value, int _index);
 	bool subValue(int _index);
 	void setPrev(Node* _prev);
 	void setNext(Node* _next);

@@ -14,7 +14,7 @@
 #include "../node/IntlNode.h"
 #include "../node/LeafNode.h"
 #include "../heap/Heap.h"
-#include "../bstr/Bstr.h"
+#include "../bstr/TBstr.h"
 #include "file.h"
 
 //It controls read, write, swap
@@ -25,10 +25,13 @@ public:
 	static const unsigned MAX_BUFFER_SIZE = 1 << 31;		//max buffer size 
 	static const unsigned HEAP_SIZE = MAX_BUFFER_SIZE/Node::INTL_SIZE;
 	static const unsigned MAX_BLOCK_NUM = 1 << 24;		//max block-num
+	static const unsigned SET_BLOCK_NUM = 1 << 8;		//initial blocks num
+	static const unsigned SET_BLOCK_INC = 1 << 8;		//base of blocks-num inc
 	static const unsigned SuperNum = MAX_BLOCK_NUM/(8*BLOCK_SIZE)+1;
 	//static const unsigned TRANSFER_CAPACITY = BLOCK_SIZE;
 	//enum ReadType { OVER = 0, EXPAND, NORMAL };
 private:
+	unsigned cur_block_num;
 	std::string filepath;
 	unsigned* treeheight;
 	BlockInfo* freelist;
@@ -36,7 +39,7 @@ private:
 	Heap* minheap;				//heap of Nodes's pointer, sorted in NF_RK
 	unsigned freemem;  			//free memory to use, non-negative
 	//is transfer and capacity necessary?!
-	//Bstr* transfer;				//reduce new-operation
+	//TBstr* transfer;				//reduce new-operation
 	//unsigned long long time; 		//QUERY(achieving an old-swap startegy?)
 	long Address(unsigned _blocknum) const;
 	unsigned Blocknum(long address) const;
@@ -53,8 +56,8 @@ public:
 	bool createNode(Node*& _np);		//use fp to create a new node
 	//NOTICE(if children and child not exist, build children's Nodes)
 	bool writeNode(Node* _np);
-	bool readBstr(Bstr* _bp, unsigned* _next);
-	bool writeBstr(const Bstr* _bp, unsigned* _curnum, bool& _SpecialBlock);
+	bool readTBstr(TBstr* _bp, unsigned* _next);
+	bool writeTBstr(const TBstr* _bp, unsigned* _curnum, bool& _SpecialBlock);
 	bool writeTree(Node* _np);
 	void updateHeap(Node* _np, unsigned _rank, bool _inheap) const;
 	void request(int _needmem);	//deal with memory request

@@ -36,3 +36,10 @@ produce
 # Produced logs
 *.log*
 *.dat*
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.tar.*
+

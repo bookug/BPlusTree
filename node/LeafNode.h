@@ -10,7 +10,7 @@
 #define _LEAF_NODE_H
 
 #include "../util/Util.h"
-#include "../bstr/Bstr.h"
+#include "../bstr/TBstr.h"
 #include "Node.h"
 
 class LeafNode: public Node    
@@ -18,7 +18,7 @@ class LeafNode: public Node
 protected:
 	Node* prev;	//LeafNode
 	Node* next;
-	Bstr* values;
+	TBstr* values;
 	void AllocValues();
 	//void FreeValues();
 public:
@@ -29,9 +29,9 @@ public:
 	void Normal();
 	Node* getPrev() const;
 	Node* getNext() const;
-	const Bstr* getValue(int _index) const;	
-	bool setValue(const Bstr* _value, int _index, bool ifcopy = false);
-	bool addValue(const Bstr* _value, int _index, bool ifcopy = false);
+	const TBstr* getValue(int _index) const;	
+	bool setValue(const TBstr* _value, int _index, bool ifcopy = false);
+	bool addValue(const TBstr* _value, int _index, bool ifcopy = false);
 	bool subValue(int _index, bool ifdel = false);
 	void setPrev(Node* _prev);
 	void setNext(Node* _next);

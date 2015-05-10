@@ -47,21 +47,21 @@ Test::Test(const char* _data, unsigned _degree, unsigned _buffer, unsigned _size
 	srand((unsigned)time(NULL));
 }
 
-Bstr*
+TBstr*
 Test::read()
 {
 	unsigned len;
 	fread(&len, sizeof(unsigned), 1, data_fp);
 	char* s = (char*)malloc(len);
 	fread(s, sizeof(char), len, data_fp);
-	return new Bstr(s, len);
+	return new TBstr(s, len);
 }
 
 void	//select a operation and print information: success? time?
 Test::operate()	
 {
-	const Bstr *bp;
-	Bstr *p1, *p2;
+	const TBstr *bp;
+	TBstr *p1, *p2;
 	unsigned ccase;
 	if(t != NULL)
 	{

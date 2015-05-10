@@ -12,7 +12,7 @@ using namespace std;
 void
 LeafNode::AllocValues()
 {
-	values = new Bstr[MAX_KEY_NUM];
+	values = new TBstr[MAX_KEY_NUM];
 }
 
 /*
@@ -75,7 +75,7 @@ LeafNode::getNext() const
 	return next;
 }
 
-const Bstr* 
+const TBstr* 
 LeafNode::getValue(int _index) const
 {
 	int num = this->getNum();
@@ -89,7 +89,7 @@ LeafNode::getValue(int _index) const
 }
 
 bool
-LeafNode::setValue(const Bstr* _value, int _index, bool ifcopy)
+LeafNode::setValue(const TBstr* _value, int _index, bool ifcopy)
 {
 	int num = this->getNum();
 	if(_index < 0 || _index >= num)
@@ -106,7 +106,7 @@ LeafNode::setValue(const Bstr* _value, int _index, bool ifcopy)
 }
 
 bool 
-LeafNode::addValue(const Bstr* _value, int _index, bool ifcopy)
+LeafNode::addValue(const TBstr* _value, int _index, bool ifcopy)
 {
 	int num = this->getNum();
 	if(_index < 0 || _index > num)
@@ -181,7 +181,7 @@ LeafNode::split(Node* _father, int _index)
 		p->addValue(this->values+i, k);
 		p->addNum();
 	}
-	const Bstr* tp = this->keys + MIN_KEY_NUM;
+	const TBstr* tp = this->keys + MIN_KEY_NUM;
 	this->setNum(MIN_KEY_NUM);
 	_father->addKey(tp, _index, true);
 	_father->addChild(p, _index+1);	//DEBUG(check the index)
@@ -198,7 +198,7 @@ LeafNode::coalesce(Node* _father, int _index)
 	int i, j = _father->getNum(), k;	//BETTER: unsigned?
 	Node* p = NULL;
 	int ccase = 0;
-	const Bstr* bstr;
+	const TBstr* bstr;
 	if(_index < j)	//the right neighbor
 	{
 		p = _father->getChild(_index+1);
@@ -282,6 +282,7 @@ LeafNode::coalesce(Node* _father, int _index)
 			break;
 		default:
 			print("error in coalesce: Invalid case!");
+			//printf("error in coalesce: Invalid case!");
 	}
 	_father->setDirty();
 	p->setDirty();
@@ -322,6 +323,7 @@ LeafNode::~LeafNode()
 void
 LeafNode::print(string s)
 {
+	/*
 	unsigned num = this->getNum();
 	Util::showtime();
 	fputs("Class LeafNode\n", Util::logsfp);
@@ -369,5 +371,6 @@ LeafNode::print(string s)
 			fprintf(Util::logsfp, "This node is bad\n");
 	}
 	else;
+	*/
 }
 

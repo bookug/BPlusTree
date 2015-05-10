@@ -34,7 +34,7 @@ RangeValue::open()
 }
 
 bool
-RangeValue::write(const Bstr* _bp)
+RangeValue::write(const TBstr* _bp)
 {
 	if(this->fp == NULL)
 		return false;
@@ -44,7 +44,7 @@ RangeValue::write(const Bstr* _bp)
 	return true;
 }
 
-const Bstr* 
+const TBstr* 
 RangeValue::read()
 {
 	if(this->fp == NULL)
@@ -68,6 +68,6 @@ RangeValue::~RangeValue()
 {
 	if(this->fp != NULL)
 		fclose(this->fp);
-	//transfer will de deleted as Bstr
+	//transfer will de deleted as TBstr
 }
 

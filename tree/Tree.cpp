@@ -24,7 +24,7 @@ Tree::Tree()
 	TSM = NULL;
 	storepath = "";
 	filename = "";
-	transfer_size = 0;
+	transfer_size[0] = transfer_size[1] = transfer_size[2] = 0;
 }
 
 Tree::Tree(const string& _storepath, const string& _filename, const char* _mode)
@@ -39,8 +39,10 @@ Tree::Tree(const string& _storepath, const string& _filename, const char* _mode)
 		this->TSM->preRead(this->root, this->leaves_head, this->leaves_tail);
 	else
 		this->root = NULL;
-	this->transfer.setStr((char*)malloc(1 << 20));
-	this->transfer_size = 1 << 20;		//initialied to 1 << 20
+	this->transfer[0].setStr((char*)malloc(1 << 20));
+	this->transfer[1].setStr((char*)malloc(1 << 20));
+	this->transfer[2].setStr((char*)malloc(1 << 20));
+	this->transfer_size[0] = this->transfer_size[1] = this->transfer_size[2] = 1 << 20;	//initialied to 1M
 }
 
 string
@@ -50,17 +52,20 @@ Tree::getFilePath()
 }
 
 void
-Tree::CopyToTransfer(const Bstr* _bstr)
+Tree::CopyToTransfer(const char* _str, unsigned _len, unsigned _index)
 {
-	unsigned length = _bstr->getLen();
-	if(length + 1 > this->transfer_size)
+	if(_index > 2)
+		return;
+	//unsigned length = _bstr->getLen();
+	unsigned length = _len;
+	if(length + 1 > this->transfer_size[_index])
 	{
-		transfer.release();
-		transfer.setStr((char*)malloc(length+1));
-		this->transfer_size = length + 1;	//one more byte: convenient to add \0
+		transfer[_index].release();
+		transfer[_index].setStr((char*)malloc(length+1));
+		this->transfer_size[_index] = length + 1;	//one more byte: convenient to add \0
 	}
-	memcpy(this->transfer.getStr(), _bstr->getStr(), length);
-	this->transfer.setLen(length);
+	memcpy(this->transfer[_index].getStr(), _str, length);
+	this->transfer[_index].setLen(length);
 }
 
 unsigned 
@@ -89,18 +94,25 @@ Tree::prepare(Node* _np) const
 		this->TSM->readNode(_np, &request);	//readNode deal with request
 }
 
-/*
-   bool
-   Tree::search(unsigned _len1, const char* _str1, unsigned& _len2, const char*& _str2) const
-   {
-   }
-   */
+bool
+Tree::search(const char* _str1, unsigned _len1, char*& _str2, int& _len2)
+{
+	const TBstr* value = NULL;
+	this->CopyToTransfer(_str1, _len1, 1);
+	bool ret = this->search(&transfer[1], value);
+	if(ret)
+	{
+		_str2 = value->getStr();
+		_len2 = value->getLen();
+	}
+	return ret;
+}
 
 bool
-Tree::search(const Bstr* _key, const Bstr*& _value)
+Tree::search(const TBstr* _key, const TBstr*& _value)
 {
 	request = 0;
-	Bstr bstr = *_key;	//not to modify its memory
+	TBstr bstr = *_key;	//not to modify its memory
 	int store;	
 	Node* ret = this->find(_key, &store, false);
 	if(ret == NULL || store == -1 || bstr != *(ret->getKey(store)))	//tree is empty or not found
@@ -108,15 +120,25 @@ Tree::search(const Bstr* _key, const Bstr*& _value)
 		bstr.clear();
 		return false;
 	}
-	this->CopyToTransfer(ret->getValue(store));	//not sum to request
-	_value = &transfer;
+	const TBstr* val = ret->getValue(store);
+	this->CopyToTransfer(val->getStr(), val->getLen(), 0);		//not sum to request
+	_value = &transfer[0];
 	this->TSM->request(request);
 	bstr.clear();
 	return true;
 }
 
 bool
-Tree::insert(const Bstr* _key, const Bstr* _value)
+Tree::insert(const char* _str1, unsigned _len1, const char* _str2, unsigned _len2)
+{
+	this->CopyToTransfer(_str1, _len1, 1);
+	this->CopyToTransfer(_str2, _len2, 2);
+	bool ret = this->insert(&transfer[1], &transfer[2]);	
+	return ret;
+}
+
+bool
+Tree::insert(const TBstr* _key, const TBstr* _value)
 {
 	request = 0;
 	Node* ret;
@@ -149,7 +171,7 @@ Tree::insert(const Bstr* _key, const Bstr* _value)
 	Node* p = this->root;
 	Node* q;
 	int i, j;
-	Bstr bstr = *_key;
+	TBstr bstr = *_key;
 	while(!p->isLeaf())
 	{
 		j = p->getNum();
@@ -208,18 +230,20 @@ Tree::insert(const Bstr* _key, const Bstr* _value)
 	return !ifexist;		//QUERY(which case:return false)
 }
 
-/*
-   bool
-   Tree::insert(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2)
-   {
-   }
-   */
+bool
+Tree::modify(const char* _str1, unsigned _len1, const char* _str2, unsigned _len2)
+{
+	this->CopyToTransfer(_str1, _len1, 1);
+	this->CopyToTransfer(_str2, _len2, 2);
+	bool ret = this->modify(&transfer[1], &transfer[2]);
+	return ret;
+}
 
 bool
-Tree::modify(const Bstr* _key, const Bstr* _value)
+Tree::modify(const TBstr* _key, const TBstr* _value)
 {					
 	request = 0;
-	Bstr bstr = *_key;
+	TBstr bstr = *_key;
 	int store;
 	Node* ret = this->find(_key, &store, true);
 	if(ret == NULL || store == -1 || bstr != *(ret->getKey(store)))	//tree is empty or not found
@@ -237,22 +261,15 @@ Tree::modify(const Bstr* _key, const Bstr* _value)
 	return true;
 }
 
-/*
-   bool
-   Tree::modify(unsigned _len1, const char* _str1, unsigned _len2, const char* _str2)
-   {
-   }
-   */
-
 /* this function is useful for search and modify, and range-query */
 Node*		//return the first key's position that >= *_key
-Tree::find(const Bstr* _key, int* _store, bool ifmodify) const
+Tree::find(const TBstr* _key, int* _store, bool ifmodify) const
 {											//to assign value for this->bstr, function shouldn't be const!
 	if(this->root == NULL)
 		return NULL;						//Tree Is Empty
 	Node* p = root;
 	int i, j;
-	Bstr bstr = *_key;					//local Bstr: multiple delete
+	TBstr bstr = *_key;					//local Bstr: multiple delete
 	while(!p->isLeaf())
 	{
 		if(ifmodify)
@@ -277,14 +294,22 @@ Tree::find(const Bstr* _key, int* _store, bool ifmodify) const
 }
 
 /*
-   Node*
-   Tree::find(unsigned _len, const char* _str, int* store) const
-   {
-   }
-   */
+Node*
+Tree::find(unsigned _len, const char* _str, int* store) const
+{
+}
+*/
+
+bool
+Tree::remove(const char* _str, unsigned _len)
+{
+	this->CopyToTransfer(_str, _len, 1);
+	bool ret = this->remove(&transfer[1]);
+	return ret;
+}
 
 bool	//BETTER: if not found, the road are also dirty! find first?
-Tree::remove(const Bstr* _key)
+Tree::remove(const TBstr* _key)
 {
 	request = 0;
 	Node* ret;
@@ -293,7 +318,7 @@ Tree::remove(const Bstr* _key)
 	Node* p = this->root;
 	Node* q;
 	int i, j;
-	Bstr bstr = *_key;
+	TBstr bstr = *_key;
 	while(!p->isLeaf())
 	{
 		j = p->getNum();
@@ -359,21 +384,14 @@ Tree::remove(const Bstr* _key)
 	return flag;		//i == j, not found		
 }
 
-/*
-   bool
-   Tree::remove(unsigned _len, const char* _str)
-   {
-   }
-   */
-
-const Bstr*
+const TBstr*
 Tree::getRangeValue()
 {
 	return this->VALUES.read();
 }
 
 bool	//special case: not exist, one-edge-case
-Tree::range_query(const Bstr* _key1, const Bstr* _key2)
+Tree::range_query(const TBstr* _key1, const TBstr* _key2)
 {		//the range is: *_key1 <= x < *_key2 	
 	/*
 	if(_key1 == NULL && _key2 == NULL)
@@ -481,6 +499,7 @@ Tree::~Tree()
 void
 Tree::print(string s)
 {
+	/*
 	Util::showtime();
 	fputs("Class Tree\n", Util::logsfp);
 	fputs("Message: ", Util::logsfp);
@@ -544,5 +563,6 @@ Tree::print(string s)
 		//TODO	
 	}
 	else;
+	*/
 }
 

@@ -131,7 +131,7 @@ IntlNode::split(Node* _father, int _index)
 		p->addNum();
 	}
 	p->addChild(this->childs[i], k);
-	const Bstr* tp = this->keys + MIN_KEY_NUM;
+	const TBstr* tp = this->keys + MIN_KEY_NUM;
 	this->setNum(MIN_KEY_NUM);
 	_father->addKey(tp, _index); 
 	_father->addChild(p, _index+1);	//DEBUG(check the index)
@@ -149,7 +149,7 @@ IntlNode::coalesce(Node* _father, int _index)
 	int i, j = _father->getNum(), k;	//BETTER: unsigned?
 	Node* p;
 	int ccase = 0;
-	const Bstr* bstr;
+	const TBstr* bstr;
 	if(_index < j)	//the right neighbor
 	{
 		p = _father->getChild(_index+1);
@@ -232,6 +232,7 @@ IntlNode::coalesce(Node* _father, int _index)
 			break;
 		default:
 			print("error in coalesce: Invalid case!");
+			//printf("error in coalesce: Invalid case!");
 	}
 	_father->setDirty();
 	p->setDirty();
@@ -263,6 +264,7 @@ IntlNode::~IntlNode()
 void
 IntlNode::print(string s)
 {
+	/*
 	int num = this->getNum();
 	Util::showtime();
 	fputs("Class IntlNode\n", Util::logsfp);
@@ -286,5 +288,6 @@ IntlNode::print(string s)
 		//TODO(check node, if satisfy B+ definition)
 	}
 	else;
+	*/
 }
 
