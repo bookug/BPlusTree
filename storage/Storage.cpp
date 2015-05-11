@@ -593,6 +593,8 @@ Storage::handler(unsigned _needmem)	//>0
 			delete p;	//non-sense node
 		if(_needmem > size)
 			_needmem -= size;
+		else if(this->freemem < SET_BUFFER_SIZE)
+			continue;			//to recover to SET_BUFFER_SIZE buffer
 		else
 			break;
 	}

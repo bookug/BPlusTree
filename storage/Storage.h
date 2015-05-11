@@ -22,7 +22,8 @@ class Storage
 {                    
 public:
 	static const unsigned BLOCK_SIZE = 1 << 16;	//fixed size of disk-block
-	static const unsigned MAX_BUFFER_SIZE = 1 << 31;		//max buffer size 
+	static const unsigned long long MAX_BUFFER_SIZE = 0x1ffffffff;		//max buffer size 
+	static const unsigned long long SET_BUFFER_SIZE = 0xffffffff;		//set buffer size
 	static const unsigned HEAP_SIZE = MAX_BUFFER_SIZE/Node::INTL_SIZE;
 	static const unsigned MAX_BLOCK_NUM = 1 << 24;		//max block-num
 	//below two constants: must can be exactly divided by 8
@@ -36,12 +37,13 @@ private:
 	std::string filepath;
 	unsigned* treeheight;
 	BlockInfo* freelist;
-	FILE* treefp;				//file: tree nodes
-	Heap* minheap;				//heap of Nodes's pointer, sorted in NF_RK
-	unsigned freemem;  			//free memory to use, non-negative
-	//is transfer and capacity necessary?!
-	//TBstr* transfer;				//reduce new-operation
-	//unsigned long long time; 		//QUERY(achieving an old-swap startegy?)
+	FILE* treefp;						//file: tree nodes
+	Heap* minheap;						//heap of Nodes's pointer, sorted in NF_RK
+	//NOTICE: freemem's type is long long here, due to large memory in server.
+	//However, needmem in handler() and request() is ok to be int/unsigned.
+	//Because the bstr' size is controlled, so is the node.
+	unsigned long long freemem;  		//free memory to use, non-negative
+	//unsigned long long time;			//QUERY(achieving an old-swap startegy?)
 	long Address(unsigned _blocknum) const;
 	unsigned Blocknum(long address) const;
 	unsigned AllocBlock();
@@ -61,9 +63,8 @@ public:
 	bool writeTBstr(const TBstr* _bp, unsigned* _curnum, bool& _SpecialBlock);
 	bool writeTree(Node* _np);
 	void updateHeap(Node* _np, unsigned _rank, bool _inheap) const;
-	void request(int _needmem);	//deal with memory request
+	void request(int _needmem);			//deal with memory request
 	bool handler(unsigned _needmem);	//swap some nodes out
-	//Node* select();                         //select a node to release
 	//bool update();				//update InMem Node's rank, with clock
 	~Storage();	
 	void print(std::string s);				//DEBUG

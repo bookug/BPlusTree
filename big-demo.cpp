@@ -10,7 +10,7 @@
 using namespace std;
 
 #define BUILD 0
-#define NUM 10000
+#define NUM 100000
 
 int main(int argc, char** argv)
 {
