@@ -571,7 +571,11 @@ void
 Storage::request(int _needmem)	//aligned to byte
 {	//NOTICE: <0 means release
 	if(_needmem > 0 && this->freemem < (unsigned)_needmem)
-		this->handler(_needmem - freemem);
+		if(!this->handler(_needmem - freemem))	//disaster in buffer memory
+		{
+			print(string("error in request: out of buffer-mem, now to exit"));
+			exit(1);
+		}
 	this->freemem -= _needmem;
 }
 
@@ -583,6 +587,8 @@ Storage::handler(unsigned _needmem)	//>0
 	while(1)
 	{
 		p = this->minheap->getTop();
+		if(p == NULL)
+			return false;	//can't satisfy or can't recover to SET_BUFFER_SIZE
 		this->minheap->remove();
 		size = p->getSize();
 		this->freemem += size;
@@ -593,8 +599,9 @@ Storage::handler(unsigned _needmem)	//>0
 			delete p;	//non-sense node
 		if(_needmem > size)
 			_needmem -= size;
-		else if(this->freemem < SET_BUFFER_SIZE)
-			continue;			//to recover to SET_BUFFER_SIZE buffer
+		//BETTER: recover to SET_BUFFER_SIZE
+		//else if(this->freemem < SET_BUFFER_SIZE)
+		//	continue;			//to recover to SET_BUFFER_SIZE buffer
 		else
 			break;
 	}
