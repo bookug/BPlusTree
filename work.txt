@@ -176,3 +176,10 @@ tail-recursive/calling may be useful when there are many function-calling!
 align-way in 64-bit machine
 write bytes in 4-align(no question)
 
+
+Work to be done before 2015.5.20
+compare and save time, report
+improve range_query and test
+childs: 8 more bytes in static and dynamic
+valgrind and fix all memory bugs
+

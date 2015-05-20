@@ -584,6 +584,8 @@ Storage::handler(unsigned _needmem)	//>0
 {
 	Node* p;
 	unsigned size;
+	//if(_needmem < SET_BUFFER_SIZE)		//to recover to SET_BUFFER_SIZE buffer
+	//	_needmem = SET_BUFFER_SIZE;
 	while(1)
 	{
 		p = this->minheap->getTop();
@@ -599,9 +601,6 @@ Storage::handler(unsigned _needmem)	//>0
 			delete p;	//non-sense node
 		if(_needmem > size)
 			_needmem -= size;
-		//BETTER: recover to SET_BUFFER_SIZE
-		//else if(this->freemem < SET_BUFFER_SIZE)
-		//	continue;			//to recover to SET_BUFFER_SIZE buffer
 		else
 			break;
 	}

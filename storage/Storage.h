@@ -23,7 +23,7 @@ class Storage
 public:
 	static const unsigned BLOCK_SIZE = 1 << 16;	//fixed size of disk-block
 	static const unsigned MAX_BUFFER_SIZE = 0xffffffff;		//max buffer size 
-	//static const unsigned long long SET_BUFFER_SIZE = 0xffffffff;		//set buffer size
+	//static const unsigned SET_BUFFER_SIZE = 1 << 30;		//set buffer size
 	static const unsigned HEAP_SIZE = MAX_BUFFER_SIZE/Node::INTL_SIZE;
 	static const unsigned MAX_BLOCK_NUM = 1 << 24;		//max block-num
 	//below two constants: must can be exactly divided by 8

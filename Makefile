@@ -51,7 +51,7 @@ runtest:
 	make
 	./test-demo
 sumlines:
-	find . -name "*.[ch]*" | xargs wc -l
+	find . -name "*.[hc]*" | xargs wc -l
 tarball:
 	tar -czvf btree.tar.gz tree storage node bstr util heap hash rangevalue test Makefile *.cpp
 send:

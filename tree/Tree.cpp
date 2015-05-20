@@ -51,11 +51,18 @@ Tree::getFilePath()
 	return storepath+"/"+filename;
 }
 
-void
+void			//WARN: not check _str and _len
 Tree::CopyToTransfer(const char* _str, unsigned _len, unsigned _index)
 {
 	if(_index > 2)
 		return;
+	/*
+	if(_str == NULL || _len == 0)
+	{
+		printf("error in CopyToTransfer: empty string\n");
+		return;
+	}
+	*/
 	//unsigned length = _bstr->getLen();
 	unsigned length = _len;
 	if(length + 1 > this->transfer_size[_index])
@@ -65,6 +72,7 @@ Tree::CopyToTransfer(const char* _str, unsigned _len, unsigned _index)
 		this->transfer_size[_index] = length + 1;	//one more byte: convenient to add \0
 	}
 	memcpy(this->transfer[_index].getStr(), _str, length);
+	this->transfer[_index].getStr()[length] = '\0';	//set for string() in KVstore
 	this->transfer[_index].setLen(length);
 }
 
@@ -98,6 +106,11 @@ bool
 Tree::search(const char* _str1, unsigned _len1, char*& _str2, int& _len2)
 {
 	const TBstr* value = NULL;
+	if(_str1 == NULL || _len1 == 0)
+	{
+		printf("error in Tree-search: empty string\n");
+		return false;
+	}
 	this->CopyToTransfer(_str1, _len1, 1);
 	bool ret = this->search(&transfer[1], value);
 	if(ret)
@@ -131,8 +144,13 @@ Tree::search(const TBstr* _key, const TBstr*& _value)
 bool
 Tree::insert(const char* _str1, unsigned _len1, const char* _str2, unsigned _len2)
 {
+	if(_str1 == NULL || _len1 == 0)
+	{
+		printf("error in Tree-insert: empty string\n");
+		return false;
+	}
 	this->CopyToTransfer(_str1, _len1, 1);
-	this->CopyToTransfer(_str2, _len2, 2);
+	this->CopyToTransfer(_str2, _len2, 2);	//not check value
 	bool ret = this->insert(&transfer[1], &transfer[2]);	
 	return ret;
 }
@@ -233,8 +251,13 @@ Tree::insert(const TBstr* _key, const TBstr* _value)
 bool
 Tree::modify(const char* _str1, unsigned _len1, const char* _str2, unsigned _len2)
 {
+	if(_str1 == NULL || _len1 == 0)
+	{
+		printf("error in Tree-modify: empty string\n");
+		return false;
+	}
 	this->CopyToTransfer(_str1, _len1, 1);
-	this->CopyToTransfer(_str2, _len2, 2);
+	this->CopyToTransfer(_str2, _len2, 2);	//not check value
 	bool ret = this->modify(&transfer[1], &transfer[2]);
 	return ret;
 }
@@ -303,6 +326,11 @@ Tree::find(unsigned _len, const char* _str, int* store) const
 bool
 Tree::remove(const char* _str, unsigned _len)
 {
+	if(_str == NULL || _len == 0)
+	{
+		printf("error in Tree-remove: empty string\n");
+		return false;
+	}
 	this->CopyToTransfer(_str, _len, 1);
 	bool ret = this->remove(&transfer[1]);
 	return ret;

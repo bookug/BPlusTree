@@ -22,7 +22,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#define DEBUG 1		//indicate that in debug mode
+//#define DEBUG 1		//indicate that in debug mode
 
 /******** all static&universal constants and fucntions ********/
 class Util	

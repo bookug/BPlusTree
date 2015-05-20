@@ -60,6 +60,7 @@ RangeValue::read()
 		this->transfer_size = len + 1;
 	}
 	fread(transfer.getStr(), sizeof(char), len, this->fp);
+	transfer.getStr()[len] = '\0';	//set for string() in KVstore
 	transfer.setLen(len);
 	return &transfer;
 }
