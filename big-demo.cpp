@@ -9,7 +9,7 @@
 #include "tree/Tree.h"
 using namespace std;
 
-#define BUILD 0
+#define BUILD 1
 #define NUM 100000
 
 int main(int argc, char** argv)

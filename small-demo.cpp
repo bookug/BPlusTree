@@ -8,7 +8,7 @@
 #include "node/LeafNode.h"
 using namespace std;
 
-#define BUILD 0
+#define BUILD 1
 
 int 
 main(int argc, char** argv)

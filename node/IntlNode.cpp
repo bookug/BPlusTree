@@ -19,13 +19,13 @@ IntlNode::AllocChilds()
 
 IntlNode::IntlNode()
 {
-	memset(childs, sizeof(Node*) * MAX_CHILD_NUM, 0);	
+	memset(childs, 0, sizeof(Node*) * MAX_CHILD_NUM);	
 	//this->AllocChilds();
 }
 
 IntlNode::IntlNode(bool isVirtual)	//call father-class's constructor automaticlly
 {
-	memset(childs, sizeof(Node*) * MAX_CHILD_NUM, 0);
+	memset(childs, 0, sizeof(Node*) * MAX_CHILD_NUM);
 	//this->AllocChilds();
 }
 
