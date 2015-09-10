@@ -183,3 +183,6 @@ improve range_query and test
 childs: 8 more bytes in static and dynamic
 valgrind and fix all memory bugs
 
+WARN:size of tree-file varies due to file-hole, this storage strategy
+may cause huge cost of storage when dataset is very large!
+
