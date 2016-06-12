@@ -3,7 +3,7 @@
 # Author: syzz
 # Mail: 1181955272@qq.com
 # Last Modified: 2015-04-26 16:33
-# Description: class declaration for TBstr(used to store arbitary string) 
+# Description: class declaration for TBstr(used to store arbitrary string) 
 =============================================================================*/
 
 #ifndef _T_BSTR_H

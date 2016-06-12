@@ -43,7 +43,7 @@ private:
 	//However, needmem in handler() and request() is ok to be int/unsigned.
 	//Because the bstr' size is controlled, so is the node.
 	unsigned long long freemem;  		//free memory to use, non-negative
-	//unsigned long long time;			//QUERY(achieving an old-swap startegy?)
+	//unsigned long long time;			//QUERY(achieving an old-swap strategy?)
 	long Address(unsigned _blocknum) const;
 	unsigned Blocknum(long address) const;
 	unsigned AllocBlock();
