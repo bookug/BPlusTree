@@ -20,7 +20,7 @@ public:
 	static const unsigned MIN_CHILD_NUM = DEGREE >> 1;
 	static const unsigned MAX_KEY_NUM = MAX_CHILD_NUM - 1;	//max key-num
 	static const unsigned MIN_KEY_NUM = MIN_CHILD_NUM - 1;	//min key-num
-	/* diffrent flags for tree-nodes, 32-bit put rank in low-bits means no need to move*/
+	/* different flags for tree-nodes, 32-bit put rank in low-bits means no need to move*/
 	static const unsigned NF_IL = 0x80000000;	//is leaf
 	static const unsigned NF_ID = 0x00080000;	//is dirty, in rank-area
 	static const unsigned NF_IM = 0x20000000;	//in memory, not virtual

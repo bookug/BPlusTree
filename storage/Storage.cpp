@@ -195,7 +195,7 @@ Storage::Address(unsigned _blocknum) const  //BETTER: inline function
 		//print(string("error in Address: Invalid blocknum ") + Util::int2string(_blocknum));
 		return -1;		//address should be non-negative
 	}
-	//NOTICE: here should explictly use long
+	//NOTICE: here should explicitly use long
 	return (long)(this->SuperNum+_blocknum-1) * (long)BLOCK_SIZE;
 }
 
